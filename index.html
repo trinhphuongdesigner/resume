@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/x-icon" href="./assets/img/brand/favicon_io/favicon.ico">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,600&family=Roboto+Slab:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/utils.css">
+    <link rel="stylesheet" href="./assets/css/resume.css">
+    <link rel="stylesheet" href="./assets/css/reponsive.css">
+  </head>
+
+  <body class="scrollbar">
+    <div class="container">
+      <div class="page">
+        <section class="card sidebar">
+          <img
+            src="./assets/img/brand/ava-min.jpg"
+            alt="Girl with DSLR"
+            class="sidebar__avatar"
+          >
+
+          <div class="sidebar__user">
+            <p class="sidebar__user__name">Mr. Trinh Phuong</p>
+  
+            <p class="sidebar__user__position">Front-end Developer</p>
+  
+            <div class="sidebar__user__icons">
+              <a class="social__icon" href="https://www.facebook.com/trinhphuong.dev/" target="_blank">
+                <img
+                  src="./assets/icons/facebook.svg"
+                  alt="facebook social icon"
+                >
+              </a>
+              
+              <a class="social__icon" href="https://twitter.com/TrnhPhn77262273?t=4Z5GZVVz4qUqW0krnHRHng&s=09&zdlink=Uo9XRcHoRsba8ZeYOszjBdHtQNHqPN8kOMvaSczfP28i8cblSo8wUo9pOsXbRMLVTN9i8ZeYUc5iRoqpCpCvC3CoDp4wN2zSBo8i8c5mS6ba8ZeYCpCpEJ0pCZSn8drz" target="_blank">
+                <img
+                  src="./assets/icons/twitter.svg"
+                  alt="twitter social icon"
+                >
+              </a>
+  
+              <a class="social__icon" disabled href="#">
+                <img
+                  src="./assets/icons/instagram.svg"
+                  alt="instagram social icon"
+                >
+              </a>
+  
+              <a class="social__icon" href="https://www.linkedin.com/in/trinh-phuong-392051130" target="_blank">
+                <img
+                  src="./assets/icons/linkedin.svg"
+                  alt="linkedin social icon"
+                >
+              </a>
+            </div>
+  
+            <div class="sidebar__user__info">
+              <div class="info-group">
+                <img
+                  src="./assets/icons/phone.svg"
+                  alt="phone"
+                  class="info-group__icon"
+                >
+                <div class="info-group__content">
+                  <p class="info-group__content__title">Phone</p>
+                  <p class="info-group__content__description" title="+84 386 592 529">+84 386 592 529</p>
+                </div>
+              </div>
+  
+              <div class="info-group">
+                <img
+                  src="./assets/icons/email.svg"
+                  alt="phone"
+                  class="info-group__icon"
+                >
+                <div class="info-group__content">
+                  <p class="info-group__content__title">Email</p>
+                  <p class="info-group__content__description" title="trinhphuong.designer@gmail.com">trinhphuong.designer@gmail.com</p>
+                </div>
+              </div>
+  
+              <div class="info-group">
+                <img
+                  src="./assets/icons/location.svg"
+                  alt="phone"
+                  class="info-group__icon"
+                >
+                <div class="info-group__content">
+                  <p class="info-group__content__title">Location</p>
+                  <p class="info-group__content__description" title="Da Nang, Viet Nam">Da Nang, Viet Nam</p>
+                </div>
+              </div>
+  
+              <div class="info-group">
+                <img
+                  src="./assets/icons/calendar.svg"
+                  alt="phone"
+                  class="info-group__icon"
+                >
+                <div class="info-group__content">
+                  <p class="info-group__content__title">Birthday</p>
+                  <p class="info-group__content__description" title="July 09, 1996">July 09, 1996</p>
+                </div>
+              </div>
+            </div>
+  
+            <a class="sidebar__btn" href="https://drive.google.com/file/d/1PNE_ChtzE20aGdu2lKLmq0f7C0gCdYT6/view?usp=sharing" download target="_blank">
+              <!-- <i class="fa fa-eye sidebar__btn__icon" aria-hidden="true"></i> -->
+              <img
+                src="./assets/icons/eye.svg"
+                alt="download"
+                class="sidebar__btn__icon"
+              >
+              <p class="sidebar__btn__title">Download Resume</p>
+            </a>
+            
+          </div>
+        </section>
+  
+        <section class="card navbar">
+          <a class="navbar__item" href="#description">
+            <img
+              src="./assets/icons/contact.svg"
+              alt="User icon"
+              class="navbar__item__icon"
+            >
+      
+            <p class="navbar__item__title">About</p>
+          </a>
+  
+          <a class="navbar__item /*active*/" href="#education">
+            <img
+              src="./assets/icons/education.svg"
+              alt="main icon"
+              class="navbar__item__icon"
+            >
+      
+            <p class="navbar__item__title">Education</p>
+          </a>
+  
+          <a class="navbar__item" href="#experience">
+            <img
+              src="./assets/icons/experience-gray.svg"
+              alt="Works icon"
+              class="navbar__item__icon"
+            >
+    
+            <p class="navbar__item__title">Experience</p>
+          </a>
+  
+          <a class="navbar__item" href="#history">
+            <img
+              src="./assets/icons/history.svg"
+              alt="Blogs icon"
+              class="navbar__item__icon"
+            >
+  
+            <p class="navbar__item__title">History</p>
+          </a>
+
+          <a class="navbar__item" href="#skills">
+            <img
+              src="./assets/icons/ideal.svg"
+              alt="Blogs icon"
+              class="navbar__item__icon"
+            >
+  
+            <p class="navbar__item__title">Skills</p>
+          </a>
+  
+          <a class="navbar__item" href="#knowledge">
+            <img
+              src="./assets/icons/knowledge.svg"
+              alt="Contact icon"
+              class="navbar__item__icon"
+            >
+    
+            <p class="navbar__item__title">Knowledge</p>
+          </a>
+        </section>
+  
+        <section class="card main">
+          <div class="bg--gray default-border-top">
+            <div class="wrapper">
+              <div class="wrapper__header">
+                <p class="wrapper__header__title">Resume</p>
+    
+                <div class="line"></div>
+              </div>
+
+              <div class="list__title" id="description">
+                <img
+                  src="./assets/icons/contact-red.svg"
+                  alt="Experience icon"
+                  class="list__title__icon"
+                >
+  
+                <p class="list__title__name">About</p>
+              </div>
+
+              <ul class="list__content__description">
+                <li>4+ years working experience as a Front-end developer (ReactJS – NextJS).</li>
+
+                <li>1+ years working experience as a back-end developer (NodeJS).</li>
+
+                <li>3+ years of experience working as a web designer.</li>
+
+                <li>Excellent team and time management skills with the goal of achieving the best results.</li>
+
+                <li>Self-motivated, team player with strong organizational and interpersonal skills.</li>
+
+                <li>Support new members to improve their skills, discuss and propose optimal solutions for the system.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wrapper">
+            <div class="wrapper__list">
+              <div class="list--left" id="education">
+                <div class="list__title">
+                  <img
+                    src="./assets/icons/educationsvg.svg"
+                    alt="Education icon"
+                    class="list__title__icon"
+                  >
+    
+                  <p class="list__title__name">Education</p>
+  
+                </div>
+  
+                <div class="list__content">
+                  <div class="list__content__item bg--FFF4F4">
+                    <p class="list__content__time">08.2015 - 06.2019</p>
+  
+                    <p class="list__content__location">Management Information System -</p>
+  
+                    <p class="list__content__address">
+                      The University of Danang - University of Economics</p>
+                  </div>
+  
+                  <div class="list__content__item bg--EEF5FA">
+                    <p class="list__content__time">11.2017 - 01.2018</p>
+  
+                    <p class="list__content__location">MCSA certificate -</p>
+  
+                    <p class="list__content__address">DNICT Danang</p>
+                  </div>
+  
+                  <div class="list__content__item bg--FCF4FF">
+                    <p class="list__content__time">04.2021 - 05.2021</p>
+  
+                    <p class="list__content__location">NodeJS -</p>
+  
+                    <p class="list__content__address"> JavaScript & Node Express in Wiicamp</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="list--right">
+                <div class="list__title" id="experience">
+                  <img
+                    src="./assets/icons/experience.svg"
+                    alt="Experience icon"
+                    class="list__title__icon"
+                  >
+    
+                  <p class="list__title__name">Experience</p>
+                </div>
+  
+                <div class="list__content">
+                  <div class="list__content__item bg--FFF1FB">
+                    <p class="list__content__time">01.2019 - 05.2021</p>
+  
+                    <p class="list__content__location">Software Engineer</p>
+  
+                    <p class="list__content__address">Orient Software.</p>
+                  </div>
+  
+                  <div class="list__content__item bg--F2F4FF">
+                    <p class="list__content__time">05.2021 - Present</p>
+  
+                    <p class="list__content__location">Full Stack Software Engineer</p>
+  
+                    <p class="list__content__address">Wiicamp.</p>
+                  </div>
+  
+                  <div class="list__content__item bg--FCF9F2">
+                    <p class="list__content__time">08.2016 - Present</p>
+  
+                    <p class="list__content__location">Designer</p>
+  
+                    <p class="list__content__address">Freelancer.</p>
+                  </div>
+
+                  <div class="list__content__item bg--FFF4F4">
+                    <p class="list__content__time">03.2023 - Present</p>
+  
+                    <p class="list__content__location">Lecturer NodeJS & NextJS</p>
+  
+                    <p class="list__content__address">Aptech.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="bg--gray">
+            <div class="wrapper">
+              <div class="list__title" id="history">
+                <img
+                  src="./assets/icons/history-red.svg"
+                  alt="Experience icon"
+                  class="list__title__icon"
+                >
+  
+                <p class="list__title__name">Work history</p>
+              </div>
+
+              <div class="list__content">
+                <div class="list__content__item bg--FFF1FB">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Bookese Web App:</p>
+
+                    <p class="list__content__time">11.2022 - Present (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>My position: Front-end developer.</li>
+
+                    <li>
+                      Description: Web application is designed in 3 parts:
+
+                      <ol>
+                        <li>Admin manages the entire system.</li>
+
+                        <li>Business owners create hotels, rooms, travel news, booking management, revenue management.</li>
+
+                        <li>Users search for hotels, facilities and services provided, book and pay, view news about tourist attractions.</li>
+                      </ol>
+                    </li>
+
+                    <li>Team size: 7.</li>
+
+                    <li>Technologies: React JS | Node JS | Socket IO | MongoDB.</li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--F2F4FF">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Vivumall Web App:</p>
+                    
+                    <p class="list__content__time">09.2022 - Present (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>My position: Front-end developer.</li>
+
+                    <li>
+                      Description: The web application is designed in 3 parts:
+
+                      <ol>
+                        <li>Admin manages the entire system.</li>
+
+                        <li>Business owners create a shop to manage products, sales, transport units, and revenue.</li>
+
+                        <li>Users buy, sell, order and pay online, view order status and consumption history.</li>
+                      </ol>
+                    </li>
+
+                    <li>Team size: 14.</li>
+
+                    <li>Technologies: React JS | Node JS | Socket IO | MongoDB.</li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FCF9F2">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Dashment Web App:</p>
+                    
+                    <p class="list__content__time">01.2022 - 06.2022 (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>My position: Front-end developer | Back-end developer.</li>
+
+                    <li>
+                      Description: The web application is designed in 2 parts:
+
+                      <ol>
+                        <li>Manage the organization and branches of an enterprise.</li>
+
+                        <li>Manage employees, projects, revenue, use as a portal page.</li>
+                      </ol>
+                    </li>
+
+                    <li>Team size: 5.</li>
+
+                    <li>Technologies: React JS | Node JS | MongoDB.</li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FFF4F4">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Wesport Web App:</p>
+                    
+                    <p class="list__content__time">11.2021 - 01.2022 (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>
+                      My position: Front-end developer, designing and programming the interface and functionality of the web on the react framework platform.
+                    </li>
+
+                    <li>
+                      Description: Web application designed to initiate and manage sports field reservations for customers.
+                    </li>
+
+                    <li>Team size: 7.</li>
+
+                    <li>Technologies: React JS | Node JS | MongoDB.</li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FFF1FB">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Chattoken Web App:</p>
+                    
+                    <p class="list__content__time">08.2021 - 11.2021 (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>
+                      My position: Front-end developer | Back-end developer.
+                    </li>
+
+                    <li>
+                      Description: development of a chat application on the Blockchain platform.
+                    </li>
+
+                    <li>Team size: 5.</li>
+
+                    <li>
+                      Technologies: React JS | Node JS | Smart Contract | Socket IO | MongoDB.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--F2F4FF">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Rubricshub Web App:</p>
+                    
+                    <p class="list__content__time">06.2021 - 09.2021 (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>
+                      My position: Full stack developer, programming interfaces and APIs on the application.
+                    </li>
+
+                    <li>
+                      Description: 
+                      <ol>
+                        <li>
+                          Designed and implemented web applications such as websites that allow teachers, students and parents to manage and participate in class progress is assessed based on Rubric criteria.
+                        </li>
+
+                        <li>
+                          Developed fully responsive web pages for optimal user UX and offered debugging services to clients.
+                        </li>
+
+                        <li>
+                          Designed and implemented an intuitive tool for non-developer clients to quickly and easily access and update data in production databases.
+                        </li>
+                      </ol>
+                    </li>
+
+                    <li>Team size: 5.</li>
+
+                    <li>
+                      Technologies: Express | Node JS | Socket IO | MongoDB.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FCF9F2">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Compas Mobile App:</p>
+                    
+                    <p class="list__content__time">02.2021 - 05.2021 (Wiicamp)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: France.</li>
+
+                    <li>
+                      My position: Back-end developer, programming APIs on the application.
+                    </li>
+
+                    <li>
+                      Description: 
+                      <ol>
+                        <li>
+                          Applications are designed and implemented to allow restaurant owners to perform tasks through mobile applications.
+                        </li>
+
+                        <li>
+                          The application is designed to automatically read emails and update orders into the data warehouse, automatically sending daily reports on stock status to the emails set by the user.
+                        </li>
+                      </ol>
+                    </li>
+
+                    <li>Team size: 4.</li>
+
+                    <li>
+                      Technologies: Express | Node JS | Socket IO | MongoDB.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FFF4F4">
+                  <div class="list__content__title">
+                    <p class="list__content__name">NeurondAI Landing page:</p>
+                    
+                    <p class="list__content__time">02.2021 - 05.2021 (Orient software)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: VietNam.</li>
+
+                    <li>
+                      My position: Designer, Front-end developer, DevOps.
+                    </li>
+
+                    <li>
+                      Description: landing Page introduces the company NeurondAI.
+                    </li>
+
+                    <li>Team size: 5.</li>
+
+                    <li>
+                      Technologies: Gatsby JS | CDN | CloudFlare.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FFF1FB">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Skribenta:</p>
+                    
+                    <p class="list__content__time">05.2020 - 06.2020 (Orient software)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: Excosoft Company - Sweden.</li>
+
+                    <li>
+                      My position: Designer.
+                    </li>
+
+                    <li>
+                      Description: Icon design for the toolkit.
+                    </li>
+
+                    <li>Team size: 1.</li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--F2F4FF">
+                  <div class="list__content__title">
+                    <p class="list__content__name">BitCastle Reporting:</p>
+                    
+                    <p class="list__content__time">10.2020 - 02.2021 (Orient software)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: Japan.</li>
+
+                    <li>
+                      My position: Front-end developer.
+                    </li>
+
+                    <li>
+                      Description: The application creates tables, charts, data statistics, import and export reports.
+                    </li>
+
+                    <li>Team size: 5.</li>
+
+                    <li>
+                      Technologies: VUE JS | .Net | SQL.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FCF9F2">
+                  <div class="list__content__title">
+                    <p class="list__content__name">SmartQA:</p>
+                    
+                    <p class="list__content__time">06.2020 - 10.2020 (Orient software)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: Japan.</li>
+
+                    <li>
+                      My position: Front-end developer.
+                    </li>
+
+                    <li>
+                      Description: Application for task management, labeling, prioritization and translation support in 4 languages.
+                    </li>
+
+                    <li>Team size: 4.</li>
+
+                    <li>
+                      Technologies: React JS | Django | Firebase | Socket IO | Stripe | Google service.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="list__content__item bg--FFF4F4">
+                  <div class="list__content__title">
+                    <p class="list__content__name">Kona Web App:</p>
+                    
+                    <p class="list__content__time">06.2019 - 05.2020 (Orient software)</p>
+                  </div>
+
+                  <ul class="list__content__description">
+                    <li>Customer: Japan.</li>
+
+                    <li>
+                      My position: Front-end developer.
+                    </li>
+
+                    <li>
+                      Description: Application with the participation of users, provider and admin. Allow providers to create and manage workspaces, users can book and pay through stripe.
+                    </li>
+
+                    <li>Team size: 4.</li>
+
+                    <li>
+                      Technologies: React JS | Django | Firebase | Socket IO.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wrapper">
+            <div class="wrapper__list">
+              <div class="wrapper__list__skill" id="skills">
+                <p class="list__title">Working Skills</p>
+  
+                <div class="list__progress">
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">ReactJS</p>
+
+                      <p class="item__title__label">80%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="80" max="100"></progress>
+                  </div>
+
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">NextJS</p>
+
+                      <p class="item__title__label">90%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="90" max="100"></progress>
+                  </div>
+
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">Back-end Developer</p>
+
+                      <p class="item__title__label">70%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="70" max="100"></progress>
+                  </div>
+
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">Illustrator</p>
+
+                      <p class="item__title__label">85%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="85" max="100"></progress>
+                  </div>
+
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">Photoshop</p>
+
+                      <p class="item__title__label">62%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="62" max="100"></progress>
+                  </div>
+
+                  <div class="list__progress__item">
+                    <div class="item__title">
+                      <p class="item__title__label">Figma</p>
+
+                      <p class="item__title__label">65%</p>
+                    </div>
+  
+                    <progress class="item__progress" value="65" max="100"></progress>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wrapper__list__Knowledge" id="knowledge">
+                <p class="list__title">Knowledge</p>
+  
+                <div class="list__tag">
+                  <p class="tag">HTML</p>
+
+                  <p class="tag">CSS</p>
+
+                  <p class="tag">JavaScript</p>
+
+                  <p class="tag">ReactJS</p>
+
+                  <p class="tag">NextJS</p>
+
+                  <p class="tag">NodeJS</p>
+
+                  <p class="tag">Express</p>
+
+                  <p class="tag">MongoDB</p>
+
+                  <p class="tag">Mongoose</p>
+
+                  <p class="tag">PhotoShop</p>
+
+                  <p class="tag">Graphic Design</p>
+
+                  <p class="tag">Photography</p>
+
+                  <p class="tag">Time Management</p>
+
+                  <p class="tag">Flexibility</p>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <p class="license">© 2021 All Rights Reserved by ib-themes.</p>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>
