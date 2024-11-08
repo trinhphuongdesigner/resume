@@ -236,6 +236,7 @@ a:active {
   font-size: 2.5rem;
   line-height: 3.3125rem;
 }
+
 /* 
 .wrapper__content {
   margin-bottom: 30px;
@@ -291,6 +292,14 @@ a:active {
   border-radius: 12px;
 }
 
+.list__content__break-line {
+  width: min(30%, 120px);
+  height: 2px;
+  background: var(--background-gradient);
+  margin: 12px 0;
+  opacity: .3;
+}
+
 .bg--FFF4F4 {
   background: #FFF4F4;
 }
@@ -330,7 +339,8 @@ a:active {
   flex-wrap: wrap;
 }
 
-.list__content__location, .list__content__name {
+.list__content__location,
+.list__content__name {
   font-size: 1.125rem;
   line-height: 1.875rem;
 }
@@ -357,7 +367,8 @@ a:active {
   display: inline;
 }
 
-.list--left, .list--right {
+.list--left,
+.list--right {
   flex: 1;
 }
 
