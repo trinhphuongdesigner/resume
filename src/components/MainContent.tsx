@@ -8,10 +8,10 @@ export default function MainContent() {
   return (
     <section className="bg-white rounded-[20px] mt-0 xl:mt-[140px]">
       <AboutSection />
-      <EducationSection />
       <ExperienceSection />
       <WorkHistorySection />
       <KnowledgeSection />
+      <EducationSection />
       
       <p className="py-3 sm:py-4 text-center text-[#44566C] text-[10px] sm:text-xs md:text-sm leading-5 sm:leading-6">
         © Create by Trinh Phuong

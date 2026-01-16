@@ -11,7 +11,7 @@ const education = [
 
 export default function EducationSection() {
   return (
-    <div className="p-4 sm:p-6 md:p-8" id="education">
+    <div className="bg-[#F8FBFB] p-4 sm:p-6 md:p-8" id="education">
       <SectionHeader icon={faGraduationCap} title="Education" />
       
       <div className="relative">

@@ -1,12 +1,11 @@
 import SectionHeader from "../ui/SectionHeader";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const aboutItems = [
-  "6+ years working experience as a Front-end developer (ReactJS – NextJS).",
-  "1+ years working experience as a back-end developer (NodeJS).",
-  "4+ years of experience in graphic design.",
-  "Proficient in embroidery software, embroidery design, UI-UX design, and 3D modeling tools.",
-  "2+ years of experience teaching and training new employees.",
+const experienceBadges = [
+  { years: "+6 yrs", label: "Frontend", color: "bg-[#FFF4F4] text-[#FA5252]" },
+  { years: "+4 yrs", label: "Design", color: "bg-[#F2F4FF] text-[#6366F1]" },
+  { years: "+2 yrs", label: "Teaching", color: "bg-[#FCF9F2] text-[#F59E0B]" },
+  { years: "+1 yr", label: "Backend", color: "bg-[#EEF5FA] text-[#0EA5E9]" },
 ];
 
 export default function AboutSection() {
@@ -22,11 +21,29 @@ export default function AboutSection() {
 
         <SectionHeader icon={faUser} title="About" />
 
-        <ul className="text-[#44566C] text-xs sm:text-sm leading-5 sm:leading-6 list-disc pl-4 sm:pl-5 space-y-1">
-          {aboutItems.map((item, idx) => (
-            <li key={idx}>{item}</li>
-          ))}
-        </ul>
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-start">
+          {/* Introduction */}
+          <div className="text-[#44566C] text-xs sm:text-sm leading-6 sm:leading-7">
+            <p>
+              Senior Frontend Developer specializing in React and Next.js, with experience in Vue and TypeScript. 
+              Built and scaled products across e-commerce, restaurant management, and SaaS platforms serving millions of users. 
+              Focused on frontend architecture, performance optimization, and user-centric design.
+            </p>
+          </div>
+
+          {/* Experience badges */}
+          <div className="grid grid-cols-2 gap-2 md:gap-3">
+            {experienceBadges.map((badge, idx) => (
+              <div 
+                key={idx} 
+                className={`${badge.color} px-3 py-2 rounded-lg text-center`}
+              >
+                <p className="font-bold text-base sm:text-lg leading-tight">{badge.years}</p>
+                <p className="text-[10px] sm:text-xs opacity-80">{badge.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

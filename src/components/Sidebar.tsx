@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faEnvelope, faLocationDot, faCalendarDays, faDownload, faCheck, faCopy, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
@@ -15,10 +15,8 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { href: "https://www.facebook.com/trinhphuong.dev/", icon: faFacebookF, alt: "facebook", color: "#1877F2" },
-  { href: "https://twitter.com/TrnhPhn77262273", icon: faTwitter, alt: "twitter", color: "#1DA1F2" },
-  { href: "https://www.instagram.com/_22august96_/", icon: faInstagram, alt: "instagram", color: "#E4405F" },
   { href: "https://www.linkedin.com/in/trinh-phuong-392051130", icon: faLinkedinIn, alt: "linkedin", color: "#0A66C2" },
+  { href: "https://github.com/trinhphuongdesigner", icon: faGithub, alt: "github", color: "#333333" },
 ];
 
 interface ContactInfo {
@@ -31,7 +29,7 @@ interface ContactInfo {
 
 const contactInfo: ContactInfo[] = [
   { icon: faPhone, title: "Phone", value: "+84 386 592 529", copyable: true, color: "#25D366" },
-  { icon: faEnvelope, title: "Email", value: "trinhphuong.designer@gmail.com", copyable: true, color: "#EA4335" },
+  { icon: faEnvelope, title: "Email", value: "trinhphuong.dev@gmail.com", copyable: true, color: "#EA4335" },
   { icon: faLocationDot, title: "Location", value: "Da Nang, Viet Nam", copyable: false, color: "#FF5722" },
   { icon: faCalendarDays, title: "Birthday", value: "July 09, 1996", copyable: false, color: "#9C27B0" },
 ];
@@ -81,7 +79,7 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
             Mr. Trinh Phuong
           </p>
           <p className="inline-block mt-3 px-4 py-[5px] font-medium text-sm bg-[#F3F6F6] rounded-lg">
-            Full-stack Developer
+            Senior Frontend Developer
           </p>
         </div>
 

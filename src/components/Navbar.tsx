@@ -14,10 +14,10 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { href: "#about", icon: faUser, title: "About", id: "about" },
-  { href: "#education", icon: faGraduationCap, title: "Education", id: "education" },
   { href: "#experience", icon: faBriefcase, title: "Experience", id: "experience" },
   { href: "#history", icon: faClockRotateLeft, title: "History", id: "history" },
   { href: "#knowledge", icon: faLightbulb, title: "Knowledge", id: "knowledge" },
+  { href: "#education", icon: faGraduationCap, title: "Education", id: "education" },
 ];
 
 export default function Navbar() {
@@ -53,14 +53,14 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 300);
 
-      const sectionIds = ["about", "education", "experience", "history", "knowledge"];
+      const sectionIds = ["about", "experience", "history", "knowledge", "education"];
       const scrollPosition = window.scrollY + 200;
       
       // Check if scrolled to bottom of page
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
       
       if (isAtBottom) {
-        setActiveSection("knowledge");
+        setActiveSection("education");
         return;
       }
 
