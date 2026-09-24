@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mr. Trinh Phuong - Full-stack Developer",
+  title: "Mr. Trinh Phuong - Mid-level Full-stack Developer",
   description: "Personal Resume Website",
   icons: {
     icon: "/img/brand/favicon_io/favicon.ico",

@@ -5,7 +5,7 @@ import { knowledge } from "@/data/resume";
 export default function KnowledgeSection() {
   return (
     <section className="section" id="knowledge">
-      <SectionHead num="03." title="Knowledge" />
+      <SectionHead num="02." title="Knowledge" />
       <div className="know-groups">
         {knowledge.map((group) => (
           <div key={group.id} className="know-group">

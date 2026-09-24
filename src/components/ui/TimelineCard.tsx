@@ -9,7 +9,7 @@ interface TimelineCardProps {
 
 export default function TimelineCard({ time, title, subtitle, subtitleUrl, bg }: TimelineCardProps) {
   return (
-    <div className={`${bg} p-3 sm:p-4 rounded-xl`}>
+    <div className={`${bg} p-3 sm:p-4 rounded-xl print:break-inside-avoid`}>
       <p className="text-[#FA5252] font-medium text-xs sm:text-sm leading-5 sm:leading-6 mb-1">{time}</p>
       <p className="text-xs sm:text-sm md:text-base leading-5 sm:leading-6 font-medium">{title}</p>
       {subtitleUrl ? (

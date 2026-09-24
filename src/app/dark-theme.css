@@ -11,8 +11,6 @@
   --accent-2: #5e9eff;
   --accent-3: #b78cff;
   --border: rgba(136, 146, 176, 0.15);
-  --mx: 50%;
-  --my: 50%;
 
   font-size: 17.6px;
   min-height: 100vh;
@@ -29,7 +27,7 @@
   position: relative;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 640px), print {
   .dark-root {
     font-size: 15.4px;
   }
@@ -73,7 +71,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(circle 380px at var(--mx) var(--my), rgba(100, 255, 218, 0.06), transparent 70%);
+  background: radial-gradient(circle 360px at var(--mx, 50%) var(--my, 50%), rgba(100, 255, 218, 0.18), transparent 70%);
   transition: background 0.05s linear;
 }
 
@@ -136,7 +134,7 @@
   position: relative;
   z-index: 2;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px), print {
   .dark-root .layout {
     grid-template-columns: 1fr;
   }
@@ -180,10 +178,6 @@
   justify-content: space-between;
   border-right: 1px solid var(--border);
 }
-/* Scrolling lives on this inner wrapper, not on .sidebar itself, so the
-   glow-card spotlight (an absolutely positioned ::before on .sidebar) can
-   render its full radial gradient without being hard-clipped by overflow
-   whenever the cursor nears the sidebar's top/bottom edge. */
 .dark-root .sidebar-scroll {
   height: 100%;
   padding: 56px 40px;
@@ -192,7 +186,7 @@
   justify-content: space-between;
   overflow-y: auto;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px), print {
   .dark-root .sidebar {
     position: relative;
     height: auto;
@@ -226,9 +220,9 @@
   background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
   opacity: 0.35;
   /* A heavier blur than the ring is thick fully dissolves the conic-gradient's
-     hue bands into a smooth halo — a lighter blur left each band's edge
+  hue bands into a smooth halo — a lighter blur left each band's edge
      visible as a hard-edged kink around the ring, especially at the corners. */
-  filter: blur(22px);
+  filter: blur(12px);
   z-index: 0;
 }
 .dark-root .avatar {
@@ -398,7 +392,7 @@
     transform: scale(2.6);
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px), print {
   .dot-nav {
     display: none;
   }
@@ -418,6 +412,18 @@
 }
 .dark-root .contact-block .label {
   color: var(--accent);
+}
+
+/* identity-photo/identity-info flatten into plain document flow here so
+   the photo, contact-block-print (hidden), name, title and desc stack in
+   that DOM order exactly as before this split existed — only print (further
+   below) turns them into real, independently-sized grid columns. */
+.dark-root .identity-photo,
+.dark-root .identity-info {
+  display: contents;
+}
+.dark-root .contact-block-print {
+  display: none;
 }
 
 .dark-root .btn-download {
@@ -446,7 +452,7 @@
   box-shadow: 0 14px 36px rgba(100, 255, 218, 0.35);
 }
 .dark-root .btn-download:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0);
 }
 .dark-root .btn-download:disabled {
   opacity: 0.6;
@@ -459,7 +465,7 @@
   padding: 0 48px 64px;
   max-width: 900px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px), print {
   .dark-root .main {
     padding: 0 24px 40px;
   }
@@ -568,7 +574,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-@media (max-width: 640px) {
+@media (max-width: 640px), print {
   .dark-root .stat-strip {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -605,57 +611,6 @@
 }
 
 /* EXPERIENCE */
-.dark-root .exp-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.dark-root .exp-card {
-  position: relative;
-  border-radius: 14px;
-  cursor: pointer;
-  overflow: hidden;
-  border: 1px solid rgba(100, 255, 218, 0.25);
-  background: linear-gradient(160deg, rgba(15, 39, 69, 0.9), rgba(10, 25, 47, 0.9));
-  transition: border-color 0.25s;
-}
-.dark-root .exp-card:hover {
-  border-color: rgba(100, 255, 218, 0.5);
-}
-.dark-root .exp-card .inner {
-  padding: 22px 26px;
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 20px;
-  align-items: center;
-}
-@media (max-width: 640px) {
-  .dark-root .exp-card .inner {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-}
-.dark-root .exp-card .time {
-  color: var(--accent);
-  font-size: 0.75rem;
-}
-.dark-root .exp-card .job-title {
-  color: var(--text-primary);
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-top: 4px;
-}
-.dark-root .exp-card .company {
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  margin-top: 2px;
-}
-.dark-root .exp-card.featured {
-  border: 1px solid transparent;
-  background:
-    linear-gradient(160deg, rgba(20, 50, 80, 0.95), rgba(10, 25, 47, 0.95)) padding-box,
-    linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3)) border-box;
-}
 .dark-root .badge-current {
   display: inline-block;
   font-size: 0.75rem;
@@ -702,9 +657,19 @@
 }
 .dark-root .company-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 10px;
   margin-bottom: 14px;
+}
+.dark-root .company-header .header-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dark-root .company-header .cluster-time {
+  color: var(--accent);
+  font-size: 0.75rem;
 }
 .dark-root .company-header h3 {
   color: var(--text-primary);
@@ -718,6 +683,7 @@
   padding: 2px 10px;
   border-radius: 12px;
   border: 1px solid var(--border);
+  white-space: nowrap;
 }
 .dark-root .company-header .co-link {
   font-size: 0.75rem;
@@ -744,7 +710,7 @@
 .dark-root .proj-row:active {
   transform: translateX(4px) scale(0.995);
 }
-@media (max-width: 640px) {
+@media (max-width: 640px), print {
   .dark-root .proj-row {
     grid-template-columns: 1fr;
   }
@@ -931,4 +897,179 @@
   font-size: 0.75rem;
   text-align: center;
   opacity: 0.5;
+}
+
+/* Print / PDF export (see src/app/api/generate-pdf/route.ts, which renders
+   this page through headless Chromium with page.emulateMediaType('print')
+   and preferCSSPageSize so it paginates using these exact rules, and the
+   portrait A4 @page rule in globals.css). The 1024px/640px/520px/700px
+   breakpoints above collapse this layout to a single column for print —
+   same as the mobile view, hence comma-combined with `print` on each
+   rather than duplicated here: page 1 ends up with the photo and basic
+   info on top, then the hero heading, description and stat numbers below,
+   all in one column. This block covers what those breakpoints don't:
+   hiding interactive-only chrome, the dot-nav's scroll spacer, the fixed
+   background, keeping cards from splitting mid-row — and, further down,
+   flipping the whole palette from dark-on-navy to dark-on-white so the
+   PDF stays readable on a black & white printer. */
+@media print {
+  .dark-root .cursor-glow,
+  .ripple,
+  .click-ring,
+  .dark-root .more-toggle,
+  .dark-root .footer-note {
+    display: none !important;
+  }
+
+  /* .extra-projects is only ever inline-styled to "none"/"block" by
+     CompanyCluster's React state (collapsed by default) — override that
+     inline style so every project is present in the exported PDF, not
+     just the ones visible pre-click. */
+  .dark-root .extra-projects {
+    display: block !important;
+  }
+
+  /* Reserves a viewport-tall block of empty space so the (now-hidden)
+     dot-nav could scroll the last section into view — meaningless once
+     paginated, and would otherwise print as a near-empty trailing page. */
+  .dark-root .main::after {
+    content: none;
+    display: none;
+    height: 0;
+  }
+
+  /* The dot-nav's absence removes the only reason this needed extra
+     breathing room above the fold. */
+  .dark-root .hero {
+    padding-top: 16px;
+  }
+
+  /* Photo+contact-left / name+title+desc-right for print: the on-screen
+     layout stacks the avatar full-width above the name/title/desc (with
+     contact info pinned near the download button further down), which
+     alone is tall enough to push the hero heading and stat numbers onto
+     page 2. Splitting into two independent-height columns — identity-photo
+     and identity-info, each a real box instead of display:contents — keeps
+     the shorter column's rows from being stretched to match the taller
+     one, which plain grid-row auto-placement across both columns would do. */
+  .dark-root .identity {
+    display: grid;
+    /* Wide enough that "trinhphuong.dev@gmail.com" fits contact-block-print's
+       row on one line at its font-size below — contact info staying on a
+       single line takes priority over giving the description more width. */
+    grid-template-columns: 220px 1fr;
+    column-gap: 24px;
+    align-items: start;
+  }
+  .dark-root .identity-photo,
+  .dark-root .identity-info {
+    display: block;
+    min-width: 0;
+  }
+  .dark-root .identity-photo .avatar-wrap {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 16px;
+  }
+  .dark-root .identity-info .desc {
+    max-width: none;
+  }
+  .dark-root .contact-block.contact-block-print {
+    display: flex;
+    margin-top: 0;
+    gap: 8px;
+    font-size: 0.7rem;
+  }
+  .dark-root .contact-block-print .row {
+    align-items: center;
+    white-space: nowrap;
+  }
+  .dark-root .contact-block-print .row .value {
+    min-width: 0;
+  }
+  .dark-root .sidebar-cta {
+    display: none !important;
+  }
+
+  .dark-root .stat,
+  .dark-root .proj-row,
+  .dark-root .edu-card {
+    break-inside: avoid;
+  }
+
+  /* Keeps the Education heading and all 3 cards together instead of the
+     heading landing alone at the bottom of a page with the cards pushed
+     to the next one. */
+  .dark-root #education {
+    break-inside: avoid;
+  }
+
+  /* Keeps a company's header glued to its first project row instead of
+     landing alone at the bottom of a page. */
+  .dark-root .company-header {
+    break-after: avoid-page;
+  }
+
+  .dark-root .know-group {
+    break-inside: avoid;
+  }
+
+  /* Light palette for print: the on-screen theme reassigns these same
+     custom properties everywhere (headings, accents, borders), so
+     redeclaring them here — plus the few hardcoded navy fills below that
+     don't reference a variable — is enough to flip the whole page from
+     dark-on-navy to dark-on-white without touching structure. */
+  .dark-root {
+    --bg-1: #ffffff;
+    --bg-2: #ffffff;
+    --bg-3: #ffffff;
+    --text-primary: #0a192f;
+    --text-secondary: #33415c;
+    --accent: #0f7a68;
+    --accent-2: #1a56b0;
+    --accent-3: #6b3fa0;
+    --border: rgba(10, 25, 47, 0.15);
+    /* `fixed` only paints correctly relative to the viewport; across many
+       paginated sheets it either repeats per page or misaligns. A flat
+       white replaces the on-screen gradient outright, rather than just
+       swapping its color stops, so no faint colored glow prints on the
+       page edges. */
+    background: #ffffff;
+    background-attachment: scroll;
+  }
+
+  /* The on-screen glow halo (blurred conic-gradient ring behind the photo)
+     is designed to blend into the dark navy background; against print's
+     flat white page it instead reads as a ghosted, mirrored second image
+     behind the photo. Print keeps just the photo and its thin border. */
+  .dark-root .avatar-wrap::before {
+    display: none;
+  }
+
+  .dark-root .avatar {
+    background-color: #eef2f6;
+  }
+
+  .dark-root .company-cluster::before {
+    box-shadow:
+      0 0 0 4px #ffffff,
+      0 0 10px rgba(10, 25, 47, 0.2);
+  }
+
+  .dark-root .edu-card {
+    background: #f7f9fc;
+    border-color: rgba(10, 25, 47, 0.15);
+  }
+
+  .dark-root .stat {
+    background: #ffffff;
+  }
+
+  .dark-root .proj-row {
+    background: rgba(10, 25, 47, 0.03);
+  }
+
+  .dark-root .tag {
+    background: rgba(10, 25, 47, 0.03);
+  }
 }

@@ -1,9 +1,9 @@
 export const personal = {
-  name: "Trinh Phuong",
-  fullName: "Mr. Trinh Phuong",
-  title: "Middle Frontend Developer",
+  name: "Trinh Dinh Phuong",
+  fullName: "Trinh Dinh Phuong",
+  title: "Mid-level Full-stack Developer",
   summary:
-    "Middle Frontend Developer specializing in React and Next.js, with experience in Vue and TypeScript. Built and scaled products across e-commerce, restaurant management, and SaaS platforms serving millions of users. Focused on frontend architecture, performance optimization, and user-centric design.",
+    "Mid-level Full-stack Developer specializing in React, Next.js, and TypeScript, with additional experience in Vue. Built and scaled products across e-commerce, restaurant management, hotel, residential management, and SaaS platforms serving millions of users. Focused on frontend architecture, performance optimization, and user-centric design.",
   avatarSrc: "/img/brand/ava-min.jpg",
 };
 
@@ -416,17 +416,23 @@ export function getResumeFilename() {
   return `${namePart}-${dd}-${mm}-${yyyy}.pdf`;
 }
 
+export interface MergedTimelineEntry extends ExperienceEntry {
+  projects: Project[];
+  visibleCount?: number;
+}
+
 /**
  * Merges experience roles with their corresponding work-history projects (matched by id)
- * for the print/PDF view, which combines Experience + Work History into one section
- * instead of repeating the same companies twice.
+ * into a single timeline, so the Experience section never repeats the same
+ * company/role twice — once as a role and once as a work-history entry.
  */
-export function getMergedTimeline() {
+export function getMergedTimeline(): MergedTimelineEntry[] {
   return experience.map((exp) => {
     const group = workHistory.find((g) => g.id === exp.id);
     return {
       ...exp,
       projects: group?.projects ?? [],
+      visibleCount: group?.visibleCount,
     };
   });
 }

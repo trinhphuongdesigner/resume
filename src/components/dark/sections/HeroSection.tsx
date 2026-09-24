@@ -8,7 +8,7 @@ export default function HeroSection() {
         <span className="pulse" /> Available for opportunities
       </div>
       <h1>
-        Building <span className="grad">fast, scalable</span> frontend experiences since 2019
+        Building <span className="grad">fast, scalable</span> full-stack experiences since 2019
       </h1>
       <p>{personal.summary}</p>
 

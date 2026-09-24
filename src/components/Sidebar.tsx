@@ -66,23 +66,24 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
   };
 
   return (
-    <section className="relative bg-white rounded-[20px] w-full xl:w-[420px] xl:min-w-[420px] h-fit flex flex-col md:flex-row xl:flex-col items-center p-6 md:p-8">
+    <section className="relative bg-white rounded-[20px] w-full xl:w-[420px] xl:min-w-[420px] h-fit flex flex-col md:flex-row xl:flex-col items-center p-6 md:p-8 print:flex-col print:w-full print:p-4">
       <Image
         src={personal.avatarSrc}
         alt="Avatar"
         width={240}
         height={240}
         priority
-        className="w-[180px] h-[180px] md:w-[200px] md:h-[200px] object-cover rounded-[20px] 
-          absolute md:relative xl:absolute 
-          top-[-90px] md:top-0 xl:top-[-100px] 
-          left-1/2 md:left-0 xl:left-1/2 
-          -translate-x-1/2 md:translate-x-0 xl:-translate-x-1/2"
+        className="w-[180px] h-[180px] md:w-[200px] md:h-[200px] object-cover rounded-[20px]
+          absolute md:relative xl:absolute
+          top-[-90px] md:top-0 xl:top-[-100px]
+          left-1/2 md:left-0 xl:left-1/2
+          -translate-x-1/2 md:translate-x-0 xl:-translate-x-1/2
+          print:relative print:top-0 print:left-0 print:translate-x-0"
       />
 
-      <div className="pt-[100px] md:pt-0 xl:pt-[120px] md:ml-6 xl:ml-0 flex-1 w-full">
+      <div className="pt-[100px] md:pt-0 xl:pt-[120px] md:ml-6 xl:ml-0 flex-1 w-full print:pt-4 print:ml-0">
         {/* Name & Title - centered on mobile/xl, left on md */}
-        <div className="text-center md:text-left xl:text-center px-4">
+        <div className="text-center md:text-left xl:text-center px-4 print:text-center">
           <p className="font-[var(--font-roboto-slab)] font-medium text-xl md:text-[1.5rem] leading-[2rem]">
             {personal.fullName}
           </p>
@@ -92,7 +93,7 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
         </div>
 
         {/* Social links - centered on mobile/xl, left on md */}
-        <div className="flex flex-row mt-4 mb-5 px-4 justify-center md:justify-start xl:justify-center">
+        <div className="flex flex-row mt-4 mb-5 px-4 justify-center md:justify-start xl:justify-center print:justify-center">
           {socialLinks.map((social, idx) => (
             <a
               key={idx}
@@ -111,7 +112,7 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
         </div>
 
         {/* Contact info - full width */}
-        <div className="w-full mb-5 p-4 rounded-2xl bg-[#F3F6F6] md:bg-white xl:bg-[#F3F6F6]">
+        <div className="w-full mb-5 p-4 rounded-2xl bg-[#F3F6F6] md:bg-white xl:bg-[#F3F6F6] print:bg-[#F3F6F6]">
           {contactInfo.map((info, idx) => (
             <div
               key={idx}
@@ -153,8 +154,8 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
           ))}
         </div>
 
-        {/* Download button - centered on mobile/xl, left on md */}
-        <div className="text-center md:text-left xl:text-center px-4">
+        {/* Download button - centered on mobile/xl, left on md - not part of the exported PDF */}
+        <div className="text-center md:text-left xl:text-center px-4 print:hidden">
           <button
             onClick={onDownloadPDF}
             disabled={isGeneratingPDF}

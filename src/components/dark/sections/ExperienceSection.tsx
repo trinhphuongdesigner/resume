@@ -1,14 +1,16 @@
 import SectionHead from "../ui/SectionHead";
-import ExpCard from "../ui/ExpCard";
-import { experience } from "@/data/resume";
+import CompanyCluster from "../ui/CompanyCluster";
+import { getMergedTimeline } from "@/data/resume";
+
+const timeline = getMergedTimeline();
 
 export default function ExperienceSection() {
   return (
     <section className="section" id="experience">
       <SectionHead num="01." title="Experience" />
-      <div className="exp-grid">
-        {experience.map((entry) => (
-          <ExpCard key={entry.id} entry={entry} />
+      <div className="timeline">
+        {timeline.map((entry) => (
+          <CompanyCluster key={entry.id} entry={entry} />
         ))}
       </div>
     </section>

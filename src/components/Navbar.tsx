@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faGraduationCap, faBriefcase, faClockRotateLeft, faLightbulb, faChevronLeft, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faGraduationCap, faBriefcase, faLightbulb, faChevronLeft, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 interface NavItem {
@@ -15,7 +15,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: "#about", icon: faUser, title: "About", id: "about" },
   { href: "#experience", icon: faBriefcase, title: "Experience", id: "experience" },
-  { href: "#history", icon: faClockRotateLeft, title: "History", id: "history" },
   { href: "#knowledge", icon: faLightbulb, title: "Knowledge", id: "knowledge" },
   { href: "#education", icon: faGraduationCap, title: "Education", id: "education" },
 ];
@@ -53,7 +52,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 300);
 
-      const sectionIds = ["about", "experience", "history", "knowledge", "education"];
+      const sectionIds = ["about", "experience", "knowledge", "education"];
       const scrollPosition = window.scrollY + 200;
       
       // Check if scrolled to bottom of page
@@ -106,7 +105,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop navbar - absolute top right, above main content */}
-      <nav className={`hidden xl:flex items-center absolute right-0 top-0 p-[20px] rounded-xl bg-white shadow-sm transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <nav className={`hidden xl:flex items-center absolute right-0 top-0 p-[20px] rounded-xl bg-white shadow-sm transition-opacity duration-300 print:hidden ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         {navItems.map((item, idx) => (
           <a
             key={idx}
@@ -138,7 +137,7 @@ export default function Navbar() {
       </nav>
 
       {/* Desktop floating navbar - right side (visible when scrolled) */}
-      <div className={`hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col bg-white rounded-xl shadow-lg p-3 gap-2 transition-all duration-300 ${isScrolled ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20 pointer-events-none'}`}>
+      <div className={`hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col bg-white rounded-xl shadow-lg p-3 gap-2 transition-all duration-300 print:hidden ${isScrolled ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20 pointer-events-none'}`}>
         {navItems.map((item, idx) => (
           <a
             key={idx}
@@ -162,7 +161,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile/Tablet navbar - right side floating */}
-      <div className={`xl:hidden fixed right-0 top-1/2 -translate-y-1/2 z-50 flex items-center transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-[calc(100%-24px)]"}`}>
+      <div className={`xl:hidden fixed right-0 top-1/2 -translate-y-1/2 z-50 flex items-center transition-transform duration-300 print:hidden ${isOpen ? "translate-x-0" : "translate-x-[calc(100%-24px)]"}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-6 h-14 bg-gradient-to-b from-[#FA5252] to-[#DD2476] rounded-l-lg flex items-center justify-center shadow-lg"
@@ -203,7 +202,7 @@ export default function Navbar() {
           window.scrollTo({ top: 0, behavior: "smooth" });
           window.history.pushState(null, "", window.location.pathname);
         }}
-        className={`fixed bottom-6 right-6 w-10 h-10 bg-gradient-to-br from-[#FA5252] to-[#DD2476] rounded-full shadow-lg flex items-center justify-center z-50 transition-all duration-300 hover:scale-110 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}
+        className={`fixed bottom-6 right-6 w-10 h-10 bg-gradient-to-br from-[#FA5252] to-[#DD2476] rounded-full shadow-lg flex items-center justify-center z-50 transition-all duration-300 hover:scale-110 print:hidden ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}
       >
         <FontAwesomeIcon icon={faArrowUp} className="w-5 h-5 text-white" />
       </button>
