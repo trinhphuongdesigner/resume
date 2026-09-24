@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option 3 — Swiss Monochrome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000; --white:#FFF; --gray:#888; --line:#000; --link:#0000EE;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--white); color:var(--black);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+  }
+  a{color:var(--link);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .layout{
+    display:grid; grid-template-columns:300px 1px 1fr;
+    max-width:1280px; margin:0 auto; min-height:100vh;
+  }
+  @media (max-width:1024px){.layout{grid-template-columns:1fr;}}
+  .vline{background:var(--black); opacity:0.15;}
+  @media (max-width:1024px){.vline{display:none;}}
+
+  /* SIDEBAR */
+  .sidebar{
+    position:sticky; top:0; height:100vh; padding:40px 32px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border-right:0;
+  }
+  @media (max-width:1024px){
+    .sidebar{position:relative; height:auto; border-bottom:1px solid var(--black); padding:32px 24px;}
+  }
+  .avatar{
+    width:88px; height:88px;
+    background:#000 url('/img/brand/ava-min.jpg') center/cover;
+  }
+  .name{font-size:1.5rem; font-weight:800; margin-top:20px; letter-spacing:-0.02em;}
+  .title{font-size:0.85rem; margin-top:6px; color:var(--gray); text-transform:uppercase; letter-spacing:0.5px;}
+
+  .rule{height:1px; background:var(--black); margin:24px 0;}
+
+  .nav-list{display:flex; flex-direction:column; gap:2px;}
+  .nav-list a{
+    display:flex; justify-content:space-between; padding:10px 0;
+    border-bottom:1px solid #eee; font-size:0.85rem; color:var(--black); text-decoration:none;
+  }
+  .nav-list a .arrow{color:var(--gray);}
+  .nav-list a:hover{background:#f7f7f7;}
+
+  .contact-list{font-size:0.8rem; display:flex; flex-direction:column; gap:8px;}
+  .contact-list .row{display:flex; justify-content:space-between; border-bottom:1px dotted #ccc; padding-bottom:6px;}
+  .contact-list .k{color:var(--gray); text-transform:uppercase; font-size:0.7rem;}
+
+  .social-row{display:flex; gap:8px; margin-top:16px;}
+  .social-row a{
+    width:32px; height:32px; border:1px solid var(--black);
+    display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--black);
+  }
+  .social-row a:hover{background:var(--black); color:var(--white);}
+
+  .btn-download{
+    margin-top:20px; display:block; text-align:center; padding:12px;
+    background:var(--black); color:var(--white); font-size:0.8rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+  .btn-download:hover{background:#333;}
+
+  /* MAIN */
+  .main{padding:40px 48px;}
+  @media (max-width:1024px){.main{padding:24px;}}
+
+  .section{margin-bottom:56px;}
+  .section-head{
+    display:flex; align-items:center; gap:16px; margin-bottom:24px;
+    padding-bottom:12px; border-bottom:2px solid var(--black);
+  }
+  .section-idx{font-size:0.75rem; color:var(--gray);}
+  .section-title{font-size:1.3rem; font-weight:800; letter-spacing:-0.02em; text-transform:uppercase;}
+
+  /* badges */
+  .badge-row{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--black);}
+  .badge-row > div{padding:16px; border-right:1px solid var(--black); text-align:center;}
+  .badge-row > div:last-child{border-right:none;}
+  .badge-row .num{font-size:1.5rem; font-weight:800;}
+  .badge-row .lbl{font-size:0.7rem; color:var(--gray); text-transform:uppercase; margin-top:4px;}
+  @media (max-width:600px){.badge-row{grid-template-columns:repeat(2,1fr);}}
+
+  .about-text{margin-top:20px; font-size:0.9rem; max-width:640px;}
+
+  /* Experience table */
+  .table{width:100%; border-collapse:collapse; font-size:0.85rem;}
+  .table th{
+    text-align:left; text-transform:uppercase; font-size:0.7rem; color:var(--gray);
+    padding:8px 0; border-bottom:1px solid var(--black);
+  }
+  .table td{padding:14px 0; border-bottom:1px solid #eee; vertical-align:top;}
+  .table .time{font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--gray); white-space:nowrap;}
+  .table .role{font-weight:600;}
+
+  /* Work history strict grid */
+  .wh-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--black); border-left:1px solid var(--black);
+  }
+  @media (max-width:700px){.wh-grid{grid-template-columns:1fr;}}
+  .wh-item{
+    border-right:1px solid var(--black); border-bottom:1px solid var(--black);
+    padding:18px;
+  }
+  .wh-item .time{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gray);}
+  .wh-item .name{font-weight:700; font-size:0.9rem; margin-top:4px;}
+  .wh-item .co{font-size:0.78rem; color:var(--gray); margin-top:2px;}
+  .wh-item .desc{font-size:0.78rem; margin-top:8px;}
+  .wh-item .stack{font-size:0.7rem; margin-top:8px; font-family:'JetBrains Mono',monospace; color:var(--gray);}
+  .wh-item.more{display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:0.8rem;}
+
+  /* Knowledge — single row list, no chips */
+  .know-list{display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--black); border-left:1px solid var(--black);}
+  .know-list span{
+    padding:8px 14px; border-right:1px solid var(--black); border-bottom:1px solid var(--black);
+    font-size:0.8rem; font-family:'JetBrains Mono',monospace;
+  }
+
+  /* Education */
+  .edu-row{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--black);}
+  @media (max-width:700px){.edu-row{grid-template-columns:1fr;}}
+  .edu-row > div{padding:16px 20px 16px 0; border-right:1px solid var(--black);}
+  .edu-row > div:last-child{border-right:none;}
+  .edu-row .time{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--gray);}
+  .edu-row .t{font-weight:700; font-size:0.85rem; margin-top:6px;}
+  .edu-row .s{font-size:0.78rem; margin-top:2px; color:var(--gray);}
+
+  .footer-note{margin-top:40px; font-size:0.75rem; color:var(--gray); text-align:center;}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div>
+      <div class="avatar"></div>
+      <div class="name">Trinh Phuong</div>
+      <div class="title">Senior Frontend Developer</div>
+      <div class="rule"></div>
+      <nav class="nav-list">
+        <a href="#about">About <span class="arrow">→</span></a>
+        <a href="#experience">Experience <span class="arrow">→</span></a>
+        <a href="#history">Work History <span class="arrow">→</span></a>
+        <a href="#knowledge">Knowledge <span class="arrow">→</span></a>
+        <a href="#education">Education <span class="arrow">→</span></a>
+      </nav>
+    </div>
+    <div>
+      <div class="rule"></div>
+      <div class="contact-list">
+        <div class="row"><span class="k">Phone</span><span>+84 386 592 529</span></div>
+        <div class="row"><span class="k">Email</span><span>trinhphuong.dev@gmail.com</span></div>
+        <div class="row"><span class="k">Location</span><span>Da Nang, VN</span></div>
+      </div>
+      <div class="social-row">
+        <a href="#">in</a><a href="#">gh</a>
+      </div>
+      <a class="btn-download" href="#">↓ Download Resume</a>
+    </div>
+  </aside>
+  <div class="vline"></div>
+
+  <main class="main">
+    <section class="section" id="about">
+      <div class="section-head"><span class="section-idx mono">§01</span><h2 class="section-title">About</h2></div>
+      <div class="badge-row">
+        <div><div class="num">+6</div><div class="lbl">Yrs Frontend</div></div>
+        <div><div class="num">+4</div><div class="lbl">Yrs Design</div></div>
+        <div><div class="num">+2</div><div class="lbl">Yrs Teaching</div></div>
+        <div><div class="num">+1</div><div class="lbl">Yr Backend</div></div>
+      </div>
+      <p class="about-text">Senior Frontend Developer specializing in React and Next.js, with experience in Vue and TypeScript. Built and scaled products across e-commerce, restaurant management, and SaaS platforms serving millions of users.</p>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head"><span class="section-idx mono">§02</span><h2 class="section-title">Experience</h2></div>
+      <table class="table">
+        <thead><tr><th style="width:160px;">Period</th><th>Role</th><th>Organization</th></tr></thead>
+        <tbody>
+          <tr><td class="time">10.2025—Present</td><td class="role">Full Stack Software Engineer</td><td>Madison</td></tr>
+          <tr><td class="time">06.2024—09.2025</td><td class="role">Front-end Software Engineer</td><td>AvePoint</td></tr>
+          <tr><td class="time">03.2023—Present</td><td class="role">Lecturer NodeJS &amp; NextJS</td><td>Aptech</td></tr>
+          <tr><td class="time">08.2016—Present</td><td class="role">Designer</td><td>Freelancer</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="history">
+      <div class="section-head"><span class="section-idx mono">§03</span><h2 class="section-title">Work History — 18</h2></div>
+      <div class="wh-grid">
+        <div class="wh-item">
+          <div class="time">10.2025—Present · Madison</div>
+          <div class="name">Residential Management System</div>
+          <div class="co">Full stack developer · Team of 31</div>
+          <div class="desc">Real estate management platform for property managers.</div>
+          <div class="stack">Vue 3 / NestJS / PostgreSQL</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">06.2024—09.2025 · AvePoint</div>
+          <div class="name">Y Project</div>
+          <div class="co">Front-end developer · Team of 18</div>
+          <div class="desc">Microsoft services data query and reporting platform.</div>
+          <div class="stack">React 18 / .Net / SQL</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">07.2023—05.2024 · FPT Software</div>
+          <div class="name">X Project</div>
+          <div class="co">Front-end developer · Team of 19</div>
+          <div class="desc">Enterprise web application development.</div>
+          <div class="stack">React 18 / Java Spring Boot</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">11.2022—06.2023 · Wiicamp</div>
+          <div class="name">Bookese Web App</div>
+          <div class="co">Front-end developer · Team of 7</div>
+          <div class="desc">Hotel booking and management platform.</div>
+          <div class="stack">React / Socket.IO / MongoDB</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">09.2022—06.2023 · Wiicamp</div>
+          <div class="name">Vivumall Web App</div>
+          <div class="co">Front-end developer · Team of 14</div>
+          <div class="desc">E-commerce marketplace platform.</div>
+          <div class="stack">React / Node.js / MongoDB</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">01.2022—06.2022 · Wiicamp</div>
+          <div class="name">Dashment Web App</div>
+          <div class="co">FE &amp; BE developer · Team of 5</div>
+          <div class="desc">Enterprise organization and branch management portal.</div>
+          <div class="stack">React / Node.js / MongoDB</div>
+        </div>
+        <div class="wh-item">
+          <div class="time">10.2020—02.2021 · Orient Software</div>
+          <div class="name">BitCastle Reporting</div>
+          <div class="co">Front-end developer · Team of 5</div>
+          <div class="desc">Data statistics and reporting application (Japan).</div>
+          <div class="stack">Vue JS / .Net / SQL</div>
+        </div>
+        <div class="wh-item more">
+          + 11 more projects (Wesport, Chattoken, LOM, Rubricshub, Compas, PIT, NeurondAI, SmartQA, Skribenta, Kona…)
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="knowledge">
+      <div class="section-head"><span class="section-idx mono">§04</span><h2 class="section-title">Knowledge</h2></div>
+      <div class="know-list">
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>ReactJS</span><span>NextJS</span>
+        <span>NodeJS</span><span>Express</span><span>MongoDB</span><span>Mongoose</span>
+        <span>PhotoShop</span><span>Graphic Design</span><span>Photography</span>
+        <span>UI/UX Design</span><span>Figma</span><span>AI Prompt</span><span>Midjourney</span>
+        <span>Wilcom</span><span>Time Management</span><span>Flexibility</span>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-head"><span class="section-idx mono">§05</span><h2 class="section-title">Education</h2></div>
+      <div class="edu-row">
+        <div>
+          <div class="time">2015—2019</div>
+          <div class="t">Management Information System</div>
+          <div class="s">University of Economics — Danang</div>
+        </div>
+        <div>
+          <div class="time">11.2017—01.2018</div>
+          <div class="t">MCSA Certificate</div>
+          <div class="s">DNICT Danang</div>
+        </div>
+        <div>
+          <div class="time">04.2021—05.2021</div>
+          <div class="t">NodeJS</div>
+          <div class="s">JavaScript &amp; Node Express — Wiicamp</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note mono">© Created by Trinh Phuong</p>
+  </main>
+</div>
+</body>
+</html>

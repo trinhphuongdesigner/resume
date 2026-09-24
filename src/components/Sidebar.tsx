@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faPhone, faEnvelope, faLocationDot, faCalendarDays, faDownload, faCheck, faCopy, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { personal, contact, socialLinks as socialLinksData } from "@/data/resume";
 
 interface SocialLink {
   href: string;
@@ -14,10 +15,17 @@ interface SocialLink {
   color: string;
 }
 
-const socialLinks: SocialLink[] = [
-  { href: "https://www.linkedin.com/in/trinh-phuong-392051130", icon: faLinkedinIn, alt: "linkedin", color: "#0A66C2" },
-  { href: "https://github.com/trinhphuongdesigner", icon: faGithub, alt: "github", color: "#333333" },
-];
+const socialIconMap: Record<string, { icon: IconDefinition; color: string }> = {
+  linkedin: { icon: faLinkedinIn, color: "#0A66C2" },
+  github: { icon: faGithub, color: "#333333" },
+};
+
+const socialLinks: SocialLink[] = socialLinksData.map((link) => ({
+  href: link.href,
+  icon: socialIconMap[link.platform].icon,
+  alt: link.platform,
+  color: socialIconMap[link.platform].color,
+}));
 
 interface ContactInfo {
   icon: IconDefinition;
@@ -28,10 +36,10 @@ interface ContactInfo {
 }
 
 const contactInfo: ContactInfo[] = [
-  { icon: faPhone, title: "Phone", value: "+84 386 592 529", copyable: true, color: "#25D366" },
-  { icon: faEnvelope, title: "Email", value: "trinhphuong.dev@gmail.com", copyable: true, color: "#EA4335" },
-  { icon: faLocationDot, title: "Location", value: "Da Nang, Viet Nam", copyable: false, color: "#FF5722" },
-  { icon: faCalendarDays, title: "Birthday", value: "July 09, 1996", copyable: false, color: "#9C27B0" },
+  { icon: faPhone, title: "Phone", value: contact.phone, copyable: true, color: "#25D366" },
+  { icon: faEnvelope, title: "Email", value: contact.email, copyable: true, color: "#EA4335" },
+  { icon: faLocationDot, title: "Location", value: contact.location, copyable: false, color: "#FF5722" },
+  { icon: faCalendarDays, title: "Birthday", value: contact.birthday, copyable: false, color: "#9C27B0" },
 ];
 
 interface SidebarProps {
@@ -60,7 +68,7 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
   return (
     <section className="relative bg-white rounded-[20px] w-full xl:w-[420px] xl:min-w-[420px] h-fit flex flex-col md:flex-row xl:flex-col items-center p-6 md:p-8">
       <Image
-        src="/img/brand/ava-min.jpg"
+        src={personal.avatarSrc}
         alt="Avatar"
         width={240}
         height={240}
@@ -76,10 +84,10 @@ export default function Sidebar({ onDownloadPDF, isGeneratingPDF }: SidebarProps
         {/* Name & Title - centered on mobile/xl, left on md */}
         <div className="text-center md:text-left xl:text-center px-4">
           <p className="font-[var(--font-roboto-slab)] font-medium text-xl md:text-[1.5rem] leading-[2rem]">
-            Mr. Trinh Phuong
+            {personal.fullName}
           </p>
           <p className="inline-block mt-3 px-4 py-[5px] font-medium text-sm bg-[#F3F6F6] rounded-lg">
-            Senior Frontend Developer
+            {personal.title}
           </p>
         </div>
 

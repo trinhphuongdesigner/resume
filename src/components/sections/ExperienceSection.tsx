@@ -3,11 +3,20 @@ import TimelineCard from "../ui/TimelineCard";
 import TimelineLine from "../ui/TimelineLine";
 import TimelineDot from "../ui/TimelineDot";
 import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { experience as experienceData } from "@/data/resume";
 
-const experience = [
-  { time: "08.2016 - Present", title: "Designer", location: "Freelancer.", bg: "bg-[#FCF9F2]" },
-  { time: "03.2023 - Present", title: "Lecturer NodeJS & NextJS", location: "Aptech", url: "https://aptechvietnam.com.vn/", bg: "bg-[#FFF4F4]" },
-];
+const experienceCardBg = ["bg-[#FCF9F2]", "bg-[#FFF4F4]", "bg-[#EEF5FA]"];
+
+// Roles not already summarized in the "Work Timeline" company card (freelance/part-time/short-term)
+const experience = experienceData
+  .filter((entry) => ["freelancer", "aptech", "teaching-assistant"].includes(entry.id))
+  .map((entry, idx) => ({
+    time: entry.time.replace(/\s—\s/g, " - "),
+    title: entry.title,
+    location: entry.company,
+    url: entry.companyUrl,
+    bg: experienceCardBg[idx % experienceCardBg.length],
+  }));
 
 interface WorkHistoryItem {
   time: string;
@@ -16,13 +25,14 @@ interface WorkHistoryItem {
   url: string;
 }
 
-const workHistory: WorkHistoryItem[] = [
-  { time: "10.2025 - Present", company: "Madison", title: "Full Stack Software Engineer", url: "https://madison-technologies.com/" },
-  { time: "06.2024 - 09.2025", company: "AvePoint", title: "Front-end Software Engineer", url: "https://www.avepoint.com/" },
-  { time: "07.2023 - 05.2024", company: "FPT Software", title: "Front-end Software Engineer", url: "https://fptsoftware.com/" },
-  { time: "05.2021 - 06.2023", company: "Wiicamp", title: "Full Stack Software Engineer", url: "https://wiicamp.com/" },
-  { time: "01.2019 - 05.2021", company: "Orient Software", title: "Software Engineer", url: "https://www.orientsoftware.com/" },
-];
+const workHistory: WorkHistoryItem[] = experienceData
+  .filter((entry) => ["madison", "avepoint", "fpt", "wiicamp", "orient"].includes(entry.id))
+  .map((entry) => ({
+    time: entry.time.replace(/\s—\s/g, " - "),
+    company: entry.company,
+    title: entry.title,
+    url: entry.companyUrl ?? "#",
+  }));
 
 export default function ExperienceSection() {
   return (
@@ -59,32 +69,21 @@ export default function ExperienceSection() {
             </div>
           </div>
 
-          {/* Item 1 - Right (Designer) */}
-          <div className="relative flex items-center mb-4 sm:mb-6 md:justify-end">
-            <TimelineDot position="center" />
-            <div className="ml-9 sm:ml-10 md:ml-0 md:w-[45%] md:ml-auto">
-              <TimelineCard
-                time={experience[0].time}
-                title={experience[0].title}
-                subtitle={experience[0].location}
-                bg={experience[0].bg}
-              />
+          {/* Items - Right (Freelancer, Lecturer, Teaching Assistant) */}
+          {experience.map((item, idx) => (
+            <div key={idx} className="relative flex items-center mb-4 sm:mb-6 md:justify-end">
+              <TimelineDot position="center" />
+              <div className="ml-9 sm:ml-10 md:ml-0 md:w-[45%] md:ml-auto">
+                <TimelineCard
+                  time={item.time}
+                  title={item.title}
+                  subtitle={item.location}
+                  subtitleUrl={item.url}
+                  bg={item.bg}
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Item 2 - Right (Lecturer) */}
-          <div className="relative flex items-center mb-4 sm:mb-6 md:justify-end">
-            <TimelineDot position="center" />
-            <div className="ml-9 sm:ml-10 md:ml-0 md:w-[45%] md:ml-auto">
-              <TimelineCard
-                time={experience[1].time}
-                title={experience[1].title}
-                subtitle={experience[1].location}
-                subtitleUrl={experience[1].url}
-                bg={experience[1].bg}
-              />
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Mobile Layout - Simple list without timeline */}

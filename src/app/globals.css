@@ -22,6 +22,11 @@ body {
   background-repeat: round;
 }
 
+html[data-theme="dark"] body {
+  background-image: none;
+  background-color: #050b18;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
@@ -37,22 +42,4 @@ body {
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: var(--color-secondary);
-}
-
-
-/* PDF Mode Styles */
-.pdf-mode .experience-timeline-desktop,
-.pdf-mode .workhistory-timeline-desktop,
-.pdf-mode .experience-mobile,
-.pdf-mode .workhistory-mobile {
-  display: none !important;
-}
-
-.pdf-mode .experience-simple,
-.pdf-mode .workhistory-simple {
-  display: flex !important;
-}
-
-.pdf-mode .timeline-line-vertical {
-  display: none !important;
 }

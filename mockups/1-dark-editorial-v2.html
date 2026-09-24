@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option 1 v2 — Dark Editorial + Gradient</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#050B18;
+    --bg-2:#0A192F;
+    --bg-3:#0F2745;
+    --bg-elevated:#0E2240;
+    --text-primary:#E6F1FF;
+    --text-secondary:#8892B0;
+    --accent:#64FFDA;
+    --accent-2:#5E9EFF;
+    --accent-3:#B78CFF;
+    --border:rgba(136,146,176,0.15);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 600px at 8% -5%, rgba(100,255,218,0.14), transparent 55%),
+      radial-gradient(ellipse 700px 700px at 100% 15%, rgba(94,158,255,0.16), transparent 50%),
+      radial-gradient(ellipse 800px 900px at 50% 100%, rgba(183,140,255,0.10), transparent 55%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 35%, var(--bg-3) 100%);
+    background-attachment:fixed;
+    color:var(--text-secondary);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit; text-decoration:none;}
+
+  .layout{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    max-width:1360px;
+    margin:0 auto;
+    min-height:100vh;
+  }
+  @media (max-width: 1024px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  /* SIDEBAR */
+  .sidebar{
+    position:sticky;
+    top:0;
+    height:100vh;
+    padding:56px 40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border-right:1px solid var(--border);
+  }
+  @media (max-width: 1024px){
+    .sidebar{position:relative; height:auto; padding:48px 24px 24px; border-right:none; border-bottom:1px solid var(--border);}
+  }
+
+  .avatar-wrap{position:relative; width:104px; height:104px; margin-bottom:28px;}
+  .avatar-wrap::before{
+    content:''; position:absolute; inset:-6px; border-radius:14px;
+    background:conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+    opacity:0.6; filter:blur(10px); z-index:0;
+  }
+  .avatar{
+    position:relative; z-index:1; width:104px; height:104px; border-radius:10px;
+    background:#0E2240 url('/img/brand/ava-min.jpg') center/cover;
+    border:2px solid rgba(230,241,255,0.15);
+  }
+
+  .name{font-size:2rem; font-weight:800; color:var(--text-primary); letter-spacing:-0.02em; line-height:1.1;}
+  .title{
+    display:inline-block; margin-top:10px; font-size:0.8rem; font-weight:600;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    letter-spacing:0.5px; text-transform:uppercase;
+  }
+  .desc{margin-top:18px; font-size:0.9rem; max-width:320px;}
+
+  .nav-list{margin-top:44px; display:flex; flex-direction:column; gap:4px;}
+  .nav-list a{
+    position:relative;
+    display:flex; align-items:center; gap:12px;
+    font-size:0.8rem; letter-spacing:0.5px; text-transform:uppercase;
+    color:var(--text-secondary); transition:all .25s;
+    padding:8px 10px; border-radius:8px;
+  }
+  .nav-list a:hover{color:var(--text-primary); background:rgba(100,255,218,0.06);}
+  .nav-list .dash{width:24px; height:1px; background:var(--text-secondary); transition:all .25s;}
+  .nav-list a:hover .dash{width:36px; background:var(--accent);}
+
+  .contact-block{display:flex; flex-direction:column; gap:10px; margin-top:28px; font-size:0.85rem;}
+  .contact-block .row{display:flex; gap:10px; align-items:center;}
+  .contact-block .label{color:var(--accent);}
+
+  .social{display:flex; gap:14px; margin-top:28px;}
+  .social a{
+    width:38px; height:38px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center; font-size:0.8rem;
+    background:rgba(255,255,255,0.03); border:1px solid var(--border);
+    transition:all .25s;
+  }
+  .social a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-3px); box-shadow:0 8px 20px rgba(100,255,218,0.15);}
+
+  .btn-download{
+    margin-top:28px; position:relative; display:inline-flex; align-items:center; gap:10px;
+    padding:13px 22px; border-radius:8px;
+    color:#04140F; font-size:0.85rem; font-weight:700; width:fit-content;
+    background:linear-gradient(120deg, var(--accent), var(--accent-2));
+    box-shadow:0 10px 30px rgba(100,255,218,0.25);
+    transition:transform .25s, box-shadow .25s;
+  }
+  .btn-download:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(100,255,218,0.35);}
+
+  /* MAIN CONTENT */
+  .main{padding:0 48px 64px; max-width:900px;}
+  @media (max-width: 1024px){.main{padding:0 24px 40px;}}
+
+  /* HERO */
+  .hero{
+    padding:72px 0 56px;
+    position:relative;
+  }
+  .hero-kicker{
+    font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent);
+    display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .hero-kicker .pulse{
+    width:8px; height:8px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 0 rgba(100,255,218,0.6); animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(100,255,218,0.5);}
+    70%{box-shadow:0 0 0 10px rgba(100,255,218,0);}
+    100%{box-shadow:0 0 0 0 rgba(100,255,218,0);}
+  }
+  .hero h1{
+    font-size:clamp(2rem, 4vw, 3rem); font-weight:900; color:var(--text-primary);
+    line-height:1.1; letter-spacing:-0.02em; max-width:680px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(120deg, var(--accent) 10%, var(--accent-2) 50%, var(--accent-3) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{margin-top:20px; font-size:1rem; max-width:560px;}
+
+  /* Stat strip - big impressive numbers */
+  .stat-strip{
+    margin-top:40px; display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--border); border-radius:14px; overflow:hidden;
+    border:1px solid var(--border);
+  }
+  .stat{
+    background:rgba(14,34,64,0.6); padding:20px 16px; text-align:left;
+    position:relative; overflow:hidden;
+  }
+  .stat::after{
+    content:''; position:absolute; top:0; left:0; width:100%; height:2px;
+    background:linear-gradient(90deg, var(--accent), transparent);
+  }
+  .stat .num{
+    font-family:'Space Grotesk',sans-serif; font-size:2rem; font-weight:700; color:var(--text-primary);
+    line-height:1;
+  }
+  .stat .lbl{font-size:0.72rem; margin-top:6px; text-transform:uppercase; letter-spacing:0.5px;}
+  @media (max-width:640px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+
+  /* Section styling */
+  .section{margin-top:88px;}
+  .section-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:36px;
+  }
+  .section-num{color:var(--accent); font-size:1rem;}
+  .section-title{
+    color:var(--text-primary); font-size:1.5rem; font-weight:800;
+    display:flex; align-items:center; gap:16px; width:100%; letter-spacing:-0.01em;
+  }
+  .section-title::after{content:''; flex:1; height:1px; background:linear-gradient(90deg, var(--border), transparent);}
+
+  /* EXPERIENCE — asymmetric featured cards */
+  .exp-grid{display:flex; flex-direction:column; gap:16px;}
+  .exp-card{
+    position:relative; border-radius:14px; padding:1px;
+    background:linear-gradient(135deg, rgba(100,255,218,0.35), rgba(94,158,255,0.05) 40%, transparent 70%);
+  }
+  .exp-card .inner{
+    background:linear-gradient(160deg, rgba(15,39,69,0.9), rgba(10,25,47,0.9));
+    border-radius:13px; padding:24px 28px;
+    display:grid; grid-template-columns:140px 1fr; gap:20px; align-items:center;
+  }
+  @media (max-width:640px){.exp-card .inner{grid-template-columns:1fr; gap:8px;}}
+  .exp-card .time{color:var(--accent); font-size:0.78rem;}
+  .exp-card .job-title{color:var(--text-primary); font-size:1.15rem; font-weight:700; margin-top:4px;}
+  .exp-card .company{color:var(--text-secondary); font-size:0.88rem; margin-top:2px;}
+  .exp-card.featured .inner{
+    background:linear-gradient(160deg, rgba(20,50,80,0.95), rgba(10,25,47,0.95));
+  }
+  .exp-card.featured{
+    background:linear-gradient(135deg, var(--accent), var(--accent-2) 50%, var(--accent-3));
+  }
+  .badge-current{
+    display:inline-block; font-size:0.65rem; padding:3px 10px; border-radius:20px;
+    background:rgba(100,255,218,0.15); color:var(--accent); margin-left:10px; vertical-align:middle;
+    text-transform:uppercase; letter-spacing:0.5px;
+  }
+
+  /* WORK HISTORY — timeline with gradient spine */
+  .timeline{position:relative; padding-left:32px;}
+  .timeline::before{
+    content:''; position:absolute; left:6px; top:8px; bottom:8px; width:2px;
+    background:linear-gradient(180deg, var(--accent), var(--accent-2) 40%, var(--accent-3) 75%, transparent);
+  }
+  .company-cluster{position:relative; margin-bottom:36px;}
+  .company-cluster::before{
+    content:''; position:absolute; left:-32px; top:6px; width:14px; height:14px; border-radius:50%;
+    background:radial-gradient(circle, var(--accent), var(--accent-2));
+    box-shadow:0 0 0 4px rgba(10,25,47,1), 0 0 16px rgba(100,255,218,0.5);
+  }
+  .company-header{
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .company-header h3{color:var(--text-primary); font-size:1.05rem; font-weight:700;}
+  .company-header .count{
+    font-size:0.7rem; color:var(--text-secondary); background:rgba(255,255,255,0.04);
+    padding:2px 10px; border-radius:12px; border:1px solid var(--border);
+  }
+
+  .proj-row{
+    display:grid; grid-template-columns:130px 1fr; gap:16px;
+    padding:16px 18px; border-radius:10px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid transparent;
+    margin-bottom:8px;
+    transition:all .2s;
+  }
+  .proj-row:hover{background:rgba(100,255,218,0.04); border-color:rgba(100,255,218,0.2); transform:translateX(4px);}
+  @media (max-width:640px){.proj-row{grid-template-columns:1fr;}}
+  .proj-row .time{color:var(--accent-2); font-size:0.72rem;}
+  .proj-row .name{color:var(--text-primary); font-weight:600; font-size:0.92rem; margin-top:2px;}
+  .proj-row .desc{font-size:0.82rem; margin-top:4px;}
+  .proj-row .stack{margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;}
+  .proj-row .stack span{
+    font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--accent);
+    background:rgba(100,255,218,0.08); padding:2px 8px; border-radius:4px;
+  }
+
+  .more-toggle{
+    display:inline-flex; align-items:center; gap:8px; margin-top:4px; margin-left:2px;
+    font-size:0.8rem; color:var(--text-secondary); cursor:pointer; padding:8px 4px;
+  }
+  .more-toggle:hover{color:var(--accent);}
+  .more-toggle .chev{transition:transform .2s;}
+  .company-cluster[data-expanded="true"] .more-toggle .chev{transform:rotate(180deg);}
+  .extra-projects{display:none;}
+  .company-cluster[data-expanded="true"] .extra-projects{display:block;}
+
+  /* Knowledge — grouped pill clusters with gradient underline */
+  .know-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  @media (max-width:640px){.know-groups{grid-template-columns:1fr;}}
+  .know-group h4{
+    color:var(--text-primary); font-size:0.8rem; text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:12px; padding-bottom:8px; position:relative;
+  }
+  .know-group h4::after{
+    content:''; position:absolute; left:0; bottom:0; width:36px; height:2px;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem;
+    border:1px solid var(--border); padding:6px 12px; border-radius:20px;
+    color:var(--text-primary); background:rgba(255,255,255,0.02);
+    transition:all .2s;
+  }
+  .tag:hover{border-color:var(--accent); color:var(--accent); background:rgba(100,255,218,0.06);}
+
+  /* Education */
+  .edu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width: 700px){.edu-grid{grid-template-columns:1fr;}}
+  .edu-card{
+    border-radius:12px; padding:1px;
+    background:linear-gradient(160deg, rgba(94,158,255,0.3), transparent 60%);
+  }
+  .edu-card .inner{background:rgba(14,34,64,0.6); border-radius:11px; padding:18px;}
+  .edu-card .time{color:var(--accent); font-size:0.75rem; margin-bottom:6px;}
+  .edu-card .t{color:var(--text-primary); font-weight:600; font-size:0.9rem;}
+  .edu-card .s{font-size:0.8rem; margin-top:4px;}
+
+  .footer-note{margin-top:56px; font-size:0.75rem; text-align:center; opacity:0.5;}
+</style>
+</head>
+<body>
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div>
+      <div class="avatar-wrap"><div class="avatar"></div></div>
+      <div class="name display">Trinh Phuong</div>
+      <div class="title">Senior Frontend Developer</div>
+      <p class="desc">Specializing in React &amp; Next.js, with Vue and TypeScript experience. Building products for millions of users.</p>
+
+      <nav class="nav-list">
+        <a href="#about"><span class="dash"></span> About</a>
+        <a href="#experience"><span class="dash"></span> Experience</a>
+        <a href="#history"><span class="dash"></span> Work History</a>
+        <a href="#knowledge"><span class="dash"></span> Knowledge</a>
+        <a href="#education"><span class="dash"></span> Education</a>
+      </nav>
+    </div>
+
+    <div>
+      <div class="contact-block">
+        <div class="row"><span class="label mono">→</span> +84 386 592 529</div>
+        <div class="row"><span class="label mono">→</span> trinhphuong.dev@gmail.com</div>
+        <div class="row"><span class="label mono">→</span> Da Nang, Viet Nam</div>
+      </div>
+      <div class="social">
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="GitHub">gh</a>
+      </div>
+      <a class="btn-download" href="#">⬇ Download Resume</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <section class="hero" id="about">
+      <div class="hero-kicker"><span class="pulse"></span> Available for opportunities</div>
+      <h1 class="display">Building <span class="grad">fast, scalable</span> frontend experiences since 2019</h1>
+      <p>Senior Frontend Developer specializing in React and Next.js. Built and scaled products across e-commerce, real estate, and SaaS platforms serving millions of users.</p>
+
+      <div class="stat-strip">
+        <div class="stat"><div class="num display">6+</div><div class="lbl">Yrs Frontend</div></div>
+        <div class="stat"><div class="num display">18</div><div class="lbl">Projects Shipped</div></div>
+        <div class="stat"><div class="num display">5</div><div class="lbl">Companies</div></div>
+        <div class="stat"><div class="num display">4+</div><div class="lbl">Yrs Design</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head"><span class="section-num mono">01.</span><h2 class="section-title">Experience</h2></div>
+      <div class="exp-grid">
+        <div class="exp-card featured">
+          <div class="inner">
+            <div>
+              <div class="time mono">10.2025 — Present</div>
+            </div>
+            <div>
+              <div class="job-title">Full Stack Software Engineer <span class="badge-current">Current</span></div>
+              <div class="company">Madison</div>
+            </div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="inner">
+            <div><div class="time mono">06.2024 — 09.2025</div></div>
+            <div><div class="job-title">Front-end Software Engineer</div><div class="company">AvePoint</div></div>
+          </div>
+        </div>
+        <div class="exp-card">
+          <div class="inner">
+            <div><div class="time mono">03.2023 — Present</div></div>
+            <div><div class="job-title">Lecturer NodeJS &amp; NextJS <span class="badge-current">Part-time</span></div><div class="company">Aptech</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="history">
+      <div class="section-head"><span class="section-num mono">02.</span><h2 class="section-title">Work History</h2></div>
+
+      <div class="timeline">
+        <div class="company-cluster">
+          <div class="company-header"><h3>Madison</h3><span class="count">1 project</span></div>
+          <div class="proj-row">
+            <div><div class="time mono">10.2025—Present</div></div>
+            <div>
+              <div class="name">Residential Management System</div>
+              <div class="desc">Full stack developer · Team 31 · Real estate management platform for property managers.</div>
+              <div class="stack"><span>Vue 3</span><span>TypeScript</span><span>NestJS</span><span>PostgreSQL</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="company-cluster">
+          <div class="company-header"><h3>AvePoint</h3><span class="count">1 project</span></div>
+          <div class="proj-row">
+            <div><div class="time mono">06.2024—09.2025</div></div>
+            <div>
+              <div class="name">Y Project</div>
+              <div class="desc">Front-end developer · Team 18 · Microsoft services data query and reporting platform.</div>
+              <div class="stack"><span>React 18</span><span>TypeScript</span><span>.Net</span><span>SQL</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="company-cluster">
+          <div class="company-header"><h3>FPT Software</h3><span class="count">1 project</span></div>
+          <div class="proj-row">
+            <div><div class="time mono">07.2023—05.2024</div></div>
+            <div>
+              <div class="name">X Project</div>
+              <div class="desc">Front-end developer · Team 19 · Enterprise web application development.</div>
+              <div class="stack"><span>React 18</span><span>TypeScript</span><span>Spring Boot</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="company-cluster" data-expanded="false">
+          <div class="company-header"><h3>Wiicamp</h3><span class="count">10 projects</span></div>
+          <div class="proj-row">
+            <div><div class="time mono">11.2022—06.2023</div></div>
+            <div>
+              <div class="name">Bookese Web App</div>
+              <div class="desc">Front-end · Hotel booking and management platform.</div>
+              <div class="stack"><span>React</span><span>Socket.IO</span><span>MongoDB</span></div>
+            </div>
+          </div>
+          <div class="proj-row">
+            <div><div class="time mono">09.2022—06.2023</div></div>
+            <div>
+              <div class="name">Vivumall Web App</div>
+              <div class="desc">Front-end · E-commerce marketplace platform.</div>
+              <div class="stack"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+            </div>
+          </div>
+
+          <div class="extra-projects">
+            <div class="proj-row">
+              <div><div class="time mono">01.2022—06.2022</div></div>
+              <div><div class="name">Dashment Web App</div><div class="desc">FE &amp; BE · Enterprise organization and branch management portal.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">11.2021—01.2022</div></div>
+              <div><div class="name">Wesport Web App</div><div class="desc">Front-end · Sports field reservation management platform.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">08.2021—11.2021</div></div>
+              <div><div class="name">Chattoken Web App</div><div class="desc">Full stack · Chat application on Blockchain platform.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">09.2021—10.2021</div></div>
+              <div><div class="name">LOM Web App</div><div class="desc">Designer · UI/UX design and resources for dev team.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">06.2021—09.2021</div></div>
+              <div><div class="name">Rubricshub Web App</div><div class="desc">Full stack · Educational platform for Rubric-based assessment.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">05.2021—08.2021</div></div>
+              <div><div class="name">Compas Mobile App</div><div class="desc">Back-end · Restaurant management mobile application (France).</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">05.2021—06.2021</div></div>
+              <div><div class="name">PIT Mobile App</div><div class="desc">Back-end · Mobile application backend development.</div></div>
+            </div>
+            <div class="proj-row">
+              <div><div class="time mono">02.2021—05.2021</div></div>
+              <div><div class="name">NeurondAI Landing Page</div><div class="desc">Designer &amp; Front-end &amp; DevOps · Company introduction landing page.</div></div>
+            </div>
+          </div>
+          <div class="more-toggle" onclick="this.closest('.company-cluster').dataset.expanded = this.closest('.company-cluster').dataset.expanded==='true' ? 'false':'true'">
+            <span class="chev">▾</span> <span class="toggle-label">Show 8 more projects</span>
+          </div>
+        </div>
+
+        <div class="company-cluster">
+          <div class="company-header"><h3>Orient Software</h3><span class="count">4 projects</span></div>
+          <div class="proj-row">
+            <div><div class="time mono">10.2020—02.2021</div></div>
+            <div><div class="name">BitCastle Reporting</div><div class="desc">Front-end · Data statistics and reporting application (Japan).</div><div class="stack"><span>Vue JS</span><span>.Net</span><span>SQL</span></div></div>
+          </div>
+          <div class="proj-row">
+            <div><div class="time mono">06.2019—05.2020</div></div>
+            <div><div class="name">Kona Web App</div><div class="desc">Front-end · Workspace booking platform with Stripe payment (Japan).</div><div class="stack"><span>React</span><span>Django</span><span>Firebase</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="knowledge">
+      <div class="section-head"><span class="section-num mono">03.</span><h2 class="section-title">Knowledge</h2></div>
+      <div class="know-groups">
+        <div class="know-group">
+          <h4>Frontend</h4>
+          <div class="tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+            <span class="tag">ReactJS</span><span class="tag">NextJS</span>
+          </div>
+        </div>
+        <div class="know-group">
+          <h4>Backend</h4>
+          <div class="tags">
+            <span class="tag">NodeJS</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Mongoose</span>
+          </div>
+        </div>
+        <div class="know-group">
+          <h4>Design</h4>
+          <div class="tags">
+            <span class="tag">PhotoShop</span><span class="tag">Graphic Design</span><span class="tag">Photography</span>
+            <span class="tag">UI/UX Design</span><span class="tag">Figma</span>
+          </div>
+        </div>
+        <div class="know-group">
+          <h4>Other</h4>
+          <div class="tags">
+            <span class="tag">AI Prompt</span><span class="tag">Midjourney</span><span class="tag">Time Management</span><span class="tag">Flexibility</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-head"><span class="section-num mono">04.</span><h2 class="section-title">Education</h2></div>
+      <div class="edu-grid">
+        <div class="edu-card"><div class="inner">
+          <div class="time mono">2015 — 2019</div>
+          <div class="t">Management Information System</div>
+          <div class="s">University of Economics — Danang</div>
+        </div></div>
+        <div class="edu-card"><div class="inner">
+          <div class="time mono">11.2017 — 01.2018</div>
+          <div class="t">MCSA Certificate</div>
+          <div class="s">DNICT Danang</div>
+        </div></div>
+        <div class="edu-card"><div class="inner">
+          <div class="time mono">04.2021 — 05.2021</div>
+          <div class="t">NodeJS</div>
+          <div class="s">JavaScript &amp; Node Express — Wiicamp</div>
+        </div></div>
+      </div>
+    </section>
+
+    <p class="footer-note mono">© Created by Trinh Phuong</p>
+  </main>
+</div>
+</body>
+</html>

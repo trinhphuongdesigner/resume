@@ -3,6 +3,7 @@ import EducationSection from "./sections/EducationSection";
 import ExperienceSection from "./sections/ExperienceSection";
 import WorkHistorySection from "./sections/WorkHistorySection";
 import KnowledgeSection from "./sections/KnowledgeSection";
+import { footerNote } from "@/data/resume";
 
 export default function MainContent() {
   return (
@@ -12,9 +13,9 @@ export default function MainContent() {
       <WorkHistorySection />
       <KnowledgeSection />
       <EducationSection />
-      
+
       <p className="py-3 sm:py-4 text-center text-[#44566C] text-[10px] sm:text-xs md:text-sm leading-5 sm:leading-6">
-        © Create by Trinh Phuong
+        {footerNote}
       </p>
     </section>
   );

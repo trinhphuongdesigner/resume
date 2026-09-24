@@ -1,5 +1,6 @@
 import SectionHeader from "../ui/SectionHeader";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { workHistory as workHistoryData } from "@/data/resume";
 
 interface Project {
   name: string;
@@ -13,206 +14,27 @@ interface Project {
   bg: string;
 }
 
-const projects: Project[] = [
-  {
-    name: "Residential Management System",
-    time: "10.2025 - Present",
-    company: "Madison",
-    companyUrl: "https://madison-technologies.com/",
-    position: "Full stack developer",
-    description: "Real estate management platform for property managers.",
-    teamSize: 31,
-    tech: "Vue 3 | TypeScript | NestJS | PostgreSQL | TailwindCSS v4",
-    bg: "bg-[#EEF5FA]"
-  },
-  {
-    name: "Y Project",
-    time: "06.2024 - 09.2025",
-    company: "AvePoint",
-    companyUrl: "https://www.avepoint.com/",
-    position: "Front-end developer",
-    description: "Microsoft services data query and reporting platform.",
-    teamSize: 18,
-    tech: "React 18 | TypeScript | .Net | SQL | TailwindCSS",
-    bg: "bg-[#F2F4FF]"
-  },
-  {
-    name: "X Project",
-    time: "07.2023 - 05.2024",
-    company: "FPT Software",
-    companyUrl: "https://fptsoftware.com/",
-    position: "Front-end developer",
-    description: "Enterprise web application development.",
-    teamSize: 19,
-    tech: "React 18 | TypeScript | Java Spring Boot | TailwindCSS",
-    bg: "bg-[#FCF9F2]"
-  },
-  {
-    name: "Teaching",
-    time: "03.2023 - 09.2023",
-    company: "Aptech",
-    companyUrl: "https://aptechvietnam.com.vn/",
-    position: "Instructor of M.E.R.N training course",
-    description: "Full-stack web development training program.",
-    teamSize: 15,
-    tech: "Next.js 14 | React 18 | Node.js | Express | MongoDB | TailwindCSS v4",
-    bg: "bg-[#FFF4F4]"
-  },
-  {
-    name: "Bookese Web App",
-    time: "11.2022 - 06.2023",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Front-end developer",
-    description: "Hotel booking and management platform.",
-    teamSize: 7,
-    tech: "React JS | Node.js | Socket.IO | MongoDB",
-    bg: "bg-[#FFF1FB]"
-  },
-  {
-    name: "Vivumall Web App",
-    time: "09.2022 - 06.2023",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Front-end developer",
-    description: "E-commerce marketplace platform.",
-    teamSize: 14,
-    tech: "React JS | Node.js | Socket.IO | MongoDB",
-    bg: "bg-[#F2F4FF]"
-  },
-  {
-    name: "Dashment Web App",
-    time: "01.2022 - 06.2022",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Front-end & Back-end developer",
-    description: "Enterprise organization and branch management portal.",
-    teamSize: 5,
-    tech: "React JS | Node.js | MongoDB",
-    bg: "bg-[#EEF5FA]"
-  },
-  {
-    name: "Wesport Web App",
-    time: "11.2021 - 01.2022",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Front-end developer",
-    description: "Sports field reservation management platform.",
-    teamSize: 7,
-    tech: "React JS | Node.js | MongoDB",
-    bg: "bg-[#FCF9F2]"
-  },
-  {
-    name: "Chattoken Web App",
-    time: "08.2021 - 11.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Full stack developer",
-    description: "Chat application on Blockchain platform.",
-    teamSize: 5,
-    tech: "React JS | Node.js | Smart Contract | Socket.IO | MongoDB",
-    bg: "bg-[#FFF4F4]"
-  },
-  {
-    name: "LOM Web App",
-    time: "09.2021 - 10.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Designer",
-    description: "UI/UX design and resources for dev team.",
-    teamSize: 4,
-    tech: "Figma | PhotoShop",
-    bg: "bg-[#FFF1FB]"
-  },
-  {
-    name: "Rubricshub Web App",
-    time: "06.2021 - 09.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Full stack developer",
-    description: "Educational platform for Rubric-based assessment.",
-    teamSize: 5,
-    tech: "Express | Node.js | Socket.IO | MongoDB",
-    bg: "bg-[#F2F4FF]"
-  },
-  {
-    name: "Compas Mobile App",
-    time: "05.2021 - 08.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Back-end developer",
-    description: "Restaurant management mobile application (France).",
-    teamSize: 4,
-    tech: "React Native | Express | Node.js | Socket.IO | MongoDB",
-    bg: "bg-[#EEF5FA]"
-  },
-  {
-    name: "PIT Mobile App",
-    time: "05.2021 - 06.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Back-end developer",
-    description: "Mobile application backend development.",
-    teamSize: 3,
-    tech: "Node.js | Express | MongoDB",
-    bg: "bg-[#FCF9F2]"
-  },
-  {
-    name: "NeurondAI Landing Page",
-    time: "02.2021 - 05.2021",
-    company: "Wiicamp",
-    companyUrl: "https://wiicamp.com/",
-    position: "Designer & Front-end & DevOps",
-    description: "Company introduction landing page.",
-    teamSize: 5,
-    tech: "Gatsby JS | CDN | CloudFlare",
-    bg: "bg-[#FFF4F4]"
-  },
-  {
-    name: "BitCastle Reporting",
-    time: "10.2020 - 02.2021",
-    company: "Orient Software",
-    companyUrl: "https://www.orientsoftware.com/",
-    position: "Front-end developer",
-    description: "Data statistics and reporting application (Japan).",
-    teamSize: 5,
-    tech: "Vue JS | .Net | SQL",
-    bg: "bg-[#FFF1FB]"
-  },
-  {
-    name: "SmartQA",
-    time: "06.2020 - 10.2020",
-    company: "Orient Software",
-    companyUrl: "https://www.orientsoftware.com/",
-    position: "Front-end developer",
-    description: "Task management with multi-language support (Japan).",
-    teamSize: 4,
-    tech: "React JS | Django | Firebase | Socket.IO",
-    bg: "bg-[#F2F4FF]"
-  },
-  {
-    name: "Skribenta",
-    time: "05.2020 - 06.2020",
-    company: "Orient Software",
-    companyUrl: "https://www.orientsoftware.com/",
-    position: "Designer",
-    description: "Icon design for toolkit (Sweden - Excosoft).",
-    teamSize: 1,
-    tech: "PhotoShop | Illustrator",
-    bg: "bg-[#EEF5FA]"
-  },
-  {
-    name: "Kona Web App",
-    time: "06.2019 - 05.2020",
-    company: "Orient Software",
-    companyUrl: "https://www.orientsoftware.com/",
-    position: "Front-end developer",
-    description: "Workspace booking platform with Stripe payment (Japan).",
-    teamSize: 4,
-    tech: "React JS | Django | Firebase | Socket.IO",
-    bg: "bg-[#FCF9F2]"
-  },
+const bgPalette = [
+  "bg-[#EEF5FA]",
+  "bg-[#F2F4FF]",
+  "bg-[#FCF9F2]",
+  "bg-[#FFF4F4]",
+  "bg-[#FFF1FB]",
 ];
+
+const projects: Project[] = workHistoryData.flatMap((group) =>
+  group.projects.map((project, idx) => ({
+    name: project.name,
+    time: project.time.replace(/\s—\s/g, " - "),
+    company: group.company,
+    companyUrl: group.companyUrl,
+    position: project.position,
+    description: project.description,
+    teamSize: project.teamSize,
+    tech: project.tech.join(" | "),
+    bg: bgPalette[idx % bgPalette.length],
+  }))
+);
 
 interface ProjectCardProps {
   project: Project;
