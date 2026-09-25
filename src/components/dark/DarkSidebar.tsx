@@ -44,7 +44,6 @@ export default function DarkSidebar({ onDownloadPDF, isGeneratingPDF }: DarkSide
           <div className="identity-info">
             <div className="name">{personal.name}</div>
             <div className="title">{personal.title}</div>
-            <p className="desc">{personal.summary}</p>
           </div>
         </div>
 

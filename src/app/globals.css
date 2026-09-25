@@ -47,6 +47,148 @@ html[data-theme="dark"] body {
   }
 }
 
+/* PDF download loading overlay — book page-flip effect, ported from the
+   story reader's loading indicator. Base rule here carries the light-theme
+   palette; dark-theme.css re-skins the same classes under .dark-root. */
+.pdf-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: rgba(10, 15, 25, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: pdf-loader-fade-in 0.25s ease;
+}
+@keyframes pdf-loader-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* No card/tile behind the icon by design — it sits directly on the
+   blurred backdrop. The glow is what keeps it readable and "pops" on
+   both themes instead of a background box. */
+.pdf-loader-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 22px rgba(221, 36, 118, 0.35));
+}
+.pdf-loader-flip {
+  width: 72px;
+  height: 50px;
+  position: relative;
+  perspective: 220px;
+  /* The vanishing point has to sit on the page's own rotation axis
+     (its left edge, set via transform-origin below), not the container's
+     horizontal center — the page's left edge lands at 50% + 2.5px (the
+     spine's right edge), 2.5px right of center. Left at the 50% default,
+     the mismatch reads as the page kicking sideways off the spine
+     whenever it's part-way through the turn. */
+  perspective-origin: calc(50% + 2.5px) 50%;
+  /* The spine sits at the horizontal center on purpose: a page rotates
+     past 90deg and lands flat on the LEFT half (the "already turned"
+     stack) — that's the intended book effect, not a bug. Centering the
+     hinge gives the right stack and the left stack equal room either
+     side, so the icon stays visually centered through the whole turn.
+     overflow: hidden only guards against skew/scale overshoot mid-turn. */
+  overflow: hidden;
+}
+.pdf-loader-flip-spine {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  bottom: 1px;
+  width: 5px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #fa5252, #dd2476);
+  border-radius: 3px;
+}
+.pdf-loader-flip-base {
+  position: absolute;
+  left: calc(50% + 2.5px);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-third);
+  border-radius: 0 6px 6px 0;
+}
+.pdf-loader-flip-page {
+  position: absolute;
+  left: calc(50% + 2.5px);
+  right: 0.5px;
+  top: 0.5px;
+  bottom: 0.5px;
+  background: #ffffff;
+  border: 1px solid var(--color-third);
+  border-radius: 0 6px 6px 0;
+  transform-origin: left center;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.12);
+  animation: pdf-loader-page-turn 2.6s infinite cubic-bezier(0.5, 0.05, 0.4, 0.95);
+}
+.pdf-loader-flip-page:nth-child(3) {
+  animation-delay: -0.65s;
+}
+.pdf-loader-flip-page:nth-child(4) {
+  animation-delay: -1.3s;
+}
+@keyframes pdf-loader-page-turn {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+    opacity: 1;
+    z-index: 3;
+  }
+  24% {
+    transform: rotateY(-70deg) skewY(-5deg) scaleX(0.96);
+    opacity: 1;
+    z-index: 3;
+  }
+  50% {
+    transform: rotateY(-140deg) skewY(5deg) scaleX(0.94);
+    opacity: 1;
+    z-index: 2;
+  }
+  74% {
+    transform: rotateY(-180deg) skewY(0deg);
+    opacity: 1;
+    z-index: 1;
+  }
+  88% {
+    opacity: 0;
+    transform: rotateY(-180deg);
+  }
+  88.1%,
+  100% {
+    opacity: 0;
+    transform: rotateY(0deg);
+    z-index: 0;
+  }
+}
+.pdf-loader-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.2px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+@media print {
+  .pdf-loader-overlay {
+    display: none !important;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar-track {
   border-radius: 10px;

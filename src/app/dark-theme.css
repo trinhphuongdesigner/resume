@@ -183,7 +183,8 @@
   padding: 56px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 40px;
   overflow-y: auto;
 }
 @media (max-width: 1024px), print {
@@ -429,8 +430,9 @@
 .dark-root .btn-download {
   margin-top: 24px;
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 13px 22px;
   border-radius: 8px;
@@ -439,25 +441,55 @@
   font-family: inherit;
   font-size: 0.8rem;
   font-weight: 700;
-  width: fit-content;
+  width: 100%;
   cursor: pointer;
   background: linear-gradient(120deg, var(--accent), var(--accent-2));
   box-shadow: 0 10px 30px rgba(100, 255, 218, 0.25);
   transition:
     transform 0.25s,
     box-shadow 0.25s;
+  animation:
+    btn-download-bounce 2.2s ease-in-out infinite,
+    btn-download-glow 2.2s ease-in-out infinite;
 }
 .dark-root .btn-download:hover {
+  animation-play-state: paused;
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(100, 255, 218, 0.35);
 }
 .dark-root .btn-download:active {
+  animation-play-state: paused;
   transform: translateY(0);
 }
 .dark-root .btn-download:disabled {
+  animation: none;
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+}
+@keyframes btn-download-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes btn-download-glow {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.25);
+  }
+  50% {
+    box-shadow: 0 14px 40px rgba(100, 255, 218, 0.55);
+  }
 }
 
 /* MAIN CONTENT */
@@ -539,40 +571,104 @@
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border);
+  gap: 14px;
 }
 .dark-root .stat {
-  background: rgba(14, 34, 64, 0.6);
-  padding: 20px 16px;
-  text-align: left;
+  --stat-a: var(--accent);
+  --stat-b: var(--accent-2);
   position: relative;
+  padding: 22px 18px;
+  text-align: left;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, rgba(230, 241, 255, 0.05), rgba(14, 34, 64, 0.55));
   overflow: hidden;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: stat-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.dark-root .stat:nth-child(1) {
+  --stat-a: var(--accent);
+  --stat-b: #2dd4bf;
+  animation-delay: 0.05s;
+}
+.dark-root .stat:nth-child(2) {
+  --stat-a: var(--accent-2);
+  --stat-b: #7dd3fc;
+  animation-delay: 0.15s;
+}
+.dark-root .stat:nth-child(3) {
+  --stat-a: var(--accent-3);
+  --stat-b: #f472b6;
+  animation-delay: 0.25s;
+}
+.dark-root .stat:nth-child(4) {
+  --stat-a: #ffb86c;
+  --stat-b: var(--accent-2);
+  animation-delay: 0.35s;
+}
+.dark-root .stat.glow-card::before {
+  background: radial-gradient(circle 160px at var(--lx) var(--ly), color-mix(in srgb, var(--stat-a) 26%, transparent), transparent 70%);
 }
 .dark-root .stat::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  top: -34px;
+  right: -34px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--stat-a);
+  filter: blur(28px);
+  opacity: 0.22;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+.dark-root .stat:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--stat-a) 55%, var(--border));
+  box-shadow: 0 18px 32px -14px rgba(0, 0, 0, 0.55);
+}
+.dark-root .stat:hover::after {
+  opacity: 0.4;
+  transform: scale(1.15);
+}
+.dark-root .stat .dash {
+  display: block;
+  width: 26px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--stat-a), var(--stat-b));
 }
 .dark-root .stat .num {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  margin-top: 16px;
+  font-size: 2.2rem;
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: -0.01em;
+  background: linear-gradient(120deg, var(--stat-a), var(--stat-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .dark-root .stat .lbl {
-  font-size: 0.75rem;
-  margin-top: 6px;
+  font-size: 0.72rem;
+  margin-top: 8px;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+}
+@keyframes stat-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @media (max-width: 640px), print {
   .dark-root .stat-strip {
@@ -997,6 +1093,15 @@
     break-inside: avoid;
   }
 
+  /* The entrance animation's opacity/translate start state must never
+     reach the PDF: page.pdf() captures right after fonts are ready,
+     with no guaranteed wait for the animation to finish. */
+  .dark-root .stat {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
   /* Keeps the Education heading and all 3 cards together instead of the
      heading landing alone at the bottom of a page with the cards pushed
      to the next one. */
@@ -1072,4 +1177,29 @@
   .dark-root .tag {
     background: rgba(10, 25, 47, 0.03);
   }
+}
+
+/* PDF loading overlay — re-skins the light-theme book flip loader (see
+   globals.css) with the dark editorial palette. */
+.dark-root .pdf-loader-overlay {
+  background: rgba(5, 11, 24, 0.7);
+}
+.dark-root .pdf-loader-icon {
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 0 22px rgba(100, 255, 218, 0.35));
+}
+.dark-root .pdf-loader-flip-spine {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+/* Pages stay paper-light (not --bg-2/--bg-3) on purpose: those dark-navy
+   tokens are nearly the same color as the overlay backdrop itself, which
+   made the icon disappear into the theme instead of standing out. */
+.dark-root .pdf-loader-flip-base {
+  background: #e6f1ff;
+  border: 1px solid rgba(10, 25, 47, 0.15);
+}
+.dark-root .pdf-loader-flip-page {
+  background: #ffffff;
+  border: 1px solid rgba(10, 25, 47, 0.15);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.35);
 }

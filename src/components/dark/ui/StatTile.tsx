@@ -12,6 +12,7 @@ export default function StatTile({ years, label }: StatTileProps) {
 
   return (
     <div ref={ref} className="stat glow-card">
+      <span className="dash" />
       <div className="num">{years}</div>
       <div className="lbl">{label}</div>
     </div>

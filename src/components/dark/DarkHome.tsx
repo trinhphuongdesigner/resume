@@ -5,6 +5,7 @@ import DarkSidebar from "./DarkSidebar";
 import DarkNav from "./DarkNav";
 import CursorGlow from "./effects/CursorGlow";
 import ClickRipple from "./effects/ClickRipple";
+import PdfLoadingOverlay from "@/components/PdfLoadingOverlay";
 import HeroSection from "./sections/HeroSection";
 import ExperienceSection from "./sections/ExperienceSection";
 import KnowledgeSection from "./sections/KnowledgeSection";
@@ -12,7 +13,7 @@ import EducationSection from "./sections/EducationSection";
 import { footerNote, getResumeFilename } from "@/data/resume";
 
 export default function DarkHome() {
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(true);
 
   const handleDownloadPDF = useCallback(async () => {
     if (isGeneratingPDF) return;
@@ -43,6 +44,7 @@ export default function DarkHome() {
     <div className="dark-root">
       <CursorGlow />
       <ClickRipple />
+      <PdfLoadingOverlay visible={isGeneratingPDF} />
       <DarkNav />
       <div className="layout">
         <DarkSidebar onDownloadPDF={handleDownloadPDF} isGeneratingPDF={isGeneratingPDF} />

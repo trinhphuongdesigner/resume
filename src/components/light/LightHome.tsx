@@ -4,10 +4,11 @@ import { useState, useCallback } from "react";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import MainContent from "@/components/MainContent";
+import PdfLoadingOverlay from "@/components/PdfLoadingOverlay";
 import { getResumeFilename } from "@/data/resume";
 
 export default function LightHome() {
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(true);
 
   const handleDownloadPDF = useCallback(async () => {
     if (isGeneratingPDF) return;
@@ -39,6 +40,7 @@ export default function LightHome() {
 
   return (
     <div className="max-w-[1240px] mx-auto px-4 md:px-8 lg:px-12 xl:px-8 pb-[60px] print:max-w-full print:px-0 print:pb-0">
+      <PdfLoadingOverlay visible={isGeneratingPDF} />
       <div
         className="flex flex-col xl:flex-row mt-[100px] md:mt-[60px] xl:mt-[140px] relative gap-6 max-w-[900px] lg:max-w-[1000px] xl:max-w-none mx-auto print:flex-col print:mt-0 print:gap-0 print:max-w-full"
       >

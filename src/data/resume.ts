@@ -31,9 +31,9 @@ export interface StatBadge {
 
 export const statBadges: StatBadge[] = [
   { years: "6+", label: "Yrs Frontend" },
-  { years: "4+", label: "Yrs Design" },
-  { years: "2+", label: "Yrs Teaching" },
-  { years: "1+", label: "Yr Backend" },
+  { years: "8+", label: "Yrs Design" },
+  { years: "4+", label: "Yrs Teaching" },
+  { years: "2+", label: "Yr Backend" },
 ];
 
 export interface ExperienceEntry {
