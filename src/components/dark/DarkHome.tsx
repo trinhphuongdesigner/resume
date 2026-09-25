@@ -13,7 +13,7 @@ import EducationSection from "./sections/EducationSection";
 import { footerNote, getResumeFilename } from "@/data/resume";
 
 export default function DarkHome() {
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(true);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   const handleDownloadPDF = useCallback(async () => {
     if (isGeneratingPDF) return;
