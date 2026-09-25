@@ -1,13 +1,9 @@
 import KnowledgeTag from "../ui/KnowledgeTag";
 import SectionHeader from "../ui/SectionHeader";
 import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { knowledge as knowledgeGroups } from "@/data/resume";
 
-const knowledge = [
-  "HTML", "CSS", "JavaScript", "ReactJS", "NextJS", "NodeJS", "Express",
-  "MongoDB", "Mongoose", "PhotoShop", "Graphic Design", "Photography",
-  "UI/UX Design", "Figma", "AI Prompt", "Midjourney",
-  "Embroidery Software", "Wilcom", "Time Management", "Flexibility"
-];
+const knowledge = knowledgeGroups.flatMap((group) => group.items);
 
 export default function KnowledgeSection() {
   return (

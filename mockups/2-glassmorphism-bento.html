@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option 2 — Glassmorphism Bento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090A;
+    --card:#101113;
+    --card-border:rgba(255,255,255,0.08);
+    --text-primary:#F4F5F6;
+    --text-secondary:#8A8F98;
+    --brand:#5E6AD2;
+    --glow-a:#4EA7FC;
+    --glow-b:#B59AFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% -10%, rgba(94,106,210,0.25), transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(78,167,252,0.15), transparent 40%),
+      var(--bg);
+    color:var(--text-secondary);
+    font-family:'Inter',sans-serif;
+    letter-spacing:-0.01em;
+    line-height:1.6;
+    padding:48px 24px;
+  }
+  a{color:inherit; text-decoration:none;}
+  .mono{font-family:'Geist Mono','JetBrains Mono',monospace;}
+
+  .wrap{max-width:1200px; margin:0 auto;}
+
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(12, 1fr);
+    gap:16px;
+  }
+  @media (max-width:900px){
+    .bento{grid-template-columns:repeat(4,1fr);}
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:24px;
+    backdrop-filter:blur(20px);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:'';
+    position:absolute; inset:0; border-radius:16px; padding:1px;
+    background:linear-gradient(135deg, var(--glow-a), transparent 40%, var(--glow-b));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    opacity:0.25; pointer-events:none;
+  }
+
+  /* Profile card */
+  .card.profile{grid-column:span 4;}
+  @media (max-width:900px){.card.profile{grid-column:span 4;}}
+  .avatar{
+    width:72px; height:72px; border-radius:14px;
+    background:linear-gradient(135deg,var(--glow-a),var(--glow-b));
+    background-image:url('/img/brand/ava-min.jpg'); background-size:cover; background-position:center;
+    margin-bottom:16px;
+  }
+  .name{color:var(--text-primary); font-size:1.3rem; font-weight:700;}
+  .title-tag{
+    display:inline-block; margin-top:8px; font-size:0.75rem;
+    background:rgba(94,106,210,0.15); color:#A5B4FC; padding:4px 10px; border-radius:20px;
+  }
+  .contact-list{margin-top:20px; display:flex; flex-direction:column; gap:10px; font-size:0.8rem;}
+  .contact-list .row{display:flex; justify-content:space-between; border-bottom:1px dashed var(--card-border); padding-bottom:8px;}
+  .contact-list .k{color:var(--text-secondary);}
+  .contact-list .v{color:var(--text-primary);}
+  .social-row{display:flex; gap:10px; margin-top:16px;}
+  .social-row a{
+    width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.05);
+    display:flex; align-items:center; justify-content:center; font-size:0.7rem; color:var(--text-primary);
+  }
+  .btn-glow{
+    margin-top:16px; display:block; text-align:center; padding:10px;
+    border-radius:10px; font-size:0.8rem; font-weight:600; color:white;
+    background:linear-gradient(135deg,var(--brand),var(--glow-a));
+    box-shadow:0 0 24px rgba(94,106,210,0.4);
+  }
+
+  /* Badges card */
+  .card.badges{grid-column:span 4; display:grid; grid-template-columns:1fr 1fr; gap:12px; align-content:center;}
+  .badge-item .num{color:var(--text-primary); font-size:1.6rem; font-weight:800; background:linear-gradient(90deg,var(--glow-a),var(--glow-b)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .badge-item .lbl{font-size:0.75rem; margin-top:2px;}
+
+  /* About card */
+  .card.about{grid-column:span 4; display:flex; flex-direction:column; justify-content:center;}
+  .about h3{color:var(--text-primary); font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;}
+  .about p{font-size:0.85rem;}
+
+  /* Section label */
+  .card-label{
+    font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--glow-a);
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .card-label::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--glow-a); box-shadow:0 0 8px var(--glow-a);}
+
+  /* Experience card */
+  .card.experience{grid-column:span 5;}
+  .exp-item{padding:14px 0; border-bottom:1px solid var(--card-border);}
+  .exp-item:last-child{border-bottom:none; padding-bottom:0;}
+  .exp-item .time{color:var(--glow-a); font-size:0.72rem;}
+  .exp-item .role{color:var(--text-primary); font-weight:600; font-size:0.9rem; margin-top:2px;}
+  .exp-item .co{font-size:0.8rem;}
+
+  /* Knowledge card */
+  .card.knowledge{grid-column:span 7;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-size:0.75rem; padding:6px 12px; border-radius:20px;
+    background:rgba(255,255,255,0.04); border:1px solid var(--card-border); color:var(--text-primary);
+  }
+
+  /* Work history masonry */
+  .card.history{grid-column:span 12;}
+  .history-grid{
+    columns:3 260px; column-gap:16px; margin-top:8px;
+  }
+  @media (max-width:900px){.history-grid{columns:1;}}
+  .proj{
+    break-inside:avoid; margin-bottom:16px; padding:16px;
+    background:rgba(255,255,255,0.03); border:1px solid var(--card-border); border-radius:12px;
+  }
+  .proj .time{color:var(--glow-b); font-size:0.7rem;}
+  .proj .name{color:var(--text-primary); font-weight:600; font-size:0.9rem; margin-top:4px;}
+  .proj .co{font-size:0.75rem; margin-top:2px;}
+  .proj .desc{font-size:0.75rem; margin-top:8px;}
+  .proj .stack{margin-top:8px; display:flex; flex-wrap:wrap; gap:4px;}
+  .proj .stack span{font-size:0.65rem; background:rgba(94,106,210,0.15); color:#A5B4FC; padding:2px 6px; border-radius:4px;}
+
+  /* Education */
+  .card.education{grid-column:span 12; display:flex; gap:16px; flex-wrap:wrap;}
+  .edu-item{flex:1; min-width:220px; padding:16px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid var(--card-border);}
+  .edu-item .time{color:var(--glow-a); font-size:0.7rem;}
+  .edu-item .t{color:var(--text-primary); font-weight:600; font-size:0.85rem; margin-top:4px;}
+  .edu-item .s{font-size:0.75rem; margin-top:2px;}
+
+  .footer-note{margin-top:32px; font-size:0.75rem; text-align:center; opacity:0.5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bento">
+
+    <div class="card profile">
+      <div class="avatar"></div>
+      <div class="name">Trinh Phuong</div>
+      <div class="title-tag">Senior Frontend Developer</div>
+      <div class="contact-list">
+        <div class="row"><span class="k">Phone</span><span class="v">+84 386 592 529</span></div>
+        <div class="row"><span class="k">Email</span><span class="v">trinhphuong.dev@gmail.com</span></div>
+        <div class="row"><span class="k">Location</span><span class="v">Da Nang, VN</span></div>
+      </div>
+      <div class="social-row">
+        <a href="#">in</a><a href="#">gh</a>
+      </div>
+      <a class="btn-glow" href="#">⬇ Download Resume</a>
+    </div>
+
+    <div class="card badges">
+      <div class="badge-item"><div class="num">+6</div><div class="lbl">yrs Frontend</div></div>
+      <div class="badge-item"><div class="num">+4</div><div class="lbl">yrs Design</div></div>
+      <div class="badge-item"><div class="num">+2</div><div class="lbl">yrs Teaching</div></div>
+      <div class="badge-item"><div class="num">+1</div><div class="lbl">yr Backend</div></div>
+    </div>
+
+    <div class="card about">
+      <h3>About</h3>
+      <p>Senior Frontend Developer specializing in React and Next.js. Built products across e-commerce, restaurant management and SaaS serving millions of users.</p>
+    </div>
+
+    <div class="card experience">
+      <div class="card-label">Experience</div>
+      <div class="exp-item">
+        <div class="time mono">10.2025 — Present</div>
+        <div class="role">Full Stack Software Engineer</div>
+        <div class="co">Madison</div>
+      </div>
+      <div class="exp-item">
+        <div class="time mono">06.2024 — 09.2025</div>
+        <div class="role">Front-end Software Engineer</div>
+        <div class="co">AvePoint</div>
+      </div>
+      <div class="exp-item">
+        <div class="time mono">03.2023 — Present</div>
+        <div class="role">Lecturer NodeJS &amp; NextJS</div>
+        <div class="co">Aptech</div>
+      </div>
+    </div>
+
+    <div class="card knowledge">
+      <div class="card-label">Knowledge</div>
+      <div class="tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+        <span class="tag">ReactJS</span><span class="tag">NextJS</span><span class="tag">NodeJS</span>
+        <span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Figma</span>
+        <span class="tag">UI/UX Design</span><span class="tag">AI Prompt</span><span class="tag">Midjourney</span>
+      </div>
+    </div>
+
+    <div class="card history">
+      <div class="card-label">Work History — 18 projects</div>
+      <div class="history-grid">
+        <div class="proj">
+          <div class="time mono">10.2025—Present</div>
+          <div class="name">Residential Management System</div>
+          <div class="co">Madison · Full stack</div>
+          <div class="desc">Real estate management platform for property managers.</div>
+          <div class="stack"><span>Vue 3</span><span>NestJS</span><span>PostgreSQL</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">06.2024—09.2025</div>
+          <div class="name">Y Project</div>
+          <div class="co">AvePoint · Front-end</div>
+          <div class="desc">Microsoft services data query and reporting platform.</div>
+          <div class="stack"><span>React 18</span><span>.Net</span><span>SQL</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">07.2023—05.2024</div>
+          <div class="name">X Project</div>
+          <div class="co">FPT Software · Front-end</div>
+          <div class="desc">Enterprise web application development.</div>
+          <div class="stack"><span>React 18</span><span>Spring Boot</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">11.2022—06.2023</div>
+          <div class="name">Bookese Web App</div>
+          <div class="co">Wiicamp · Front-end</div>
+          <div class="desc">Hotel booking and management platform.</div>
+          <div class="stack"><span>React</span><span>Socket.IO</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">09.2022—06.2023</div>
+          <div class="name">Vivumall Web App</div>
+          <div class="co">Wiicamp · Front-end</div>
+          <div class="desc">E-commerce marketplace platform.</div>
+          <div class="stack"><span>React</span><span>MongoDB</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">01.2022—06.2022</div>
+          <div class="name">Dashment Web App</div>
+          <div class="co">Wiicamp · FE &amp; BE</div>
+          <div class="desc">Enterprise organization and branch management portal.</div>
+          <div class="stack"><span>React</span><span>Node.js</span></div>
+        </div>
+        <div class="proj">
+          <div class="time mono">11.2021—01.2022</div>
+          <div class="name">Wesport Web App</div>
+          <div class="co">Wiicamp · Front-end</div>
+          <div class="desc">Sports field reservation management platform.</div>
+        </div>
+        <div class="proj">
+          <div class="time mono">08.2021—11.2021</div>
+          <div class="name">Chattoken Web App</div>
+          <div class="co">Wiicamp · Full stack</div>
+          <div class="desc">Chat application on Blockchain platform.</div>
+        </div>
+        <div class="proj">
+          <div class="time mono">05.2021—08.2021</div>
+          <div class="name">Compas Mobile App</div>
+          <div class="co">Wiicamp · Back-end</div>
+          <div class="desc">Restaurant management mobile application (France).</div>
+        </div>
+        <div class="proj">
+          <div class="time mono">10.2020—02.2021</div>
+          <div class="name">BitCastle Reporting</div>
+          <div class="co">Orient Software · Front-end</div>
+          <div class="desc">Data statistics and reporting application (Japan).</div>
+        </div>
+        <div class="proj">
+          <div class="time mono">06.2020—10.2020</div>
+          <div class="name">SmartQA</div>
+          <div class="co">Orient Software · Front-end</div>
+          <div class="desc">Task management with multi-language support (Japan).</div>
+        </div>
+        <div class="proj">
+          <div class="time mono">06.2019—05.2020</div>
+          <div class="name">Kona Web App</div>
+          <div class="co">Orient Software · Front-end</div>
+          <div class="desc">Workspace booking platform with Stripe payment (Japan).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card education">
+      <div class="edu-item">
+        <div class="time mono">2015 — 2019</div>
+        <div class="t">Management Information System</div>
+        <div class="s">University of Economics — Danang</div>
+      </div>
+      <div class="edu-item">
+        <div class="time mono">11.2017 — 01.2018</div>
+        <div class="t">MCSA Certificate</div>
+        <div class="s">DNICT Danang</div>
+      </div>
+      <div class="edu-item">
+        <div class="time mono">04.2021 — 05.2021</div>
+        <div class="t">NodeJS</div>
+        <div class="s">JavaScript &amp; Node Express — Wiicamp</div>
+      </div>
+    </div>
+
+  </div>
+  <p class="footer-note mono">© Created by Trinh Phuong</p>
+</div>
+</body>
+</html>

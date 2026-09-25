@@ -2,12 +2,16 @@ import SectionHeader from "../ui/SectionHeader";
 import TimelineCard from "../ui/TimelineCard";
 import TimelineLine from "../ui/TimelineLine";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { education as educationData } from "@/data/resume";
 
-const education = [
-  { time: "08.2015 - 06.2019", title: "Management Information System", location: "The University of Danang - University of Economics", bg: "bg-[#FFF4F4]" },
-  { time: "11.2017 - 01.2018", title: "MCSA certificate", location: "DNICT Danang", bg: "bg-[#EEF5FA]" },
-  { time: "04.2021 - 05.2021", title: "NodeJS", location: "JavaScript & Node Express in Wiicamp", bg: "bg-[#FCF4FF]" },
-];
+const educationBg = ["bg-[#FFF4F4]", "bg-[#EEF5FA]", "bg-[#FCF4FF]"];
+
+const education = educationData.map((entry, idx) => ({
+  time: entry.time.replace(/\s—\s/g, " - "),
+  title: entry.title,
+  location: entry.location,
+  bg: educationBg[idx % educationBg.length],
+}));
 
 export default function EducationSection() {
   return (

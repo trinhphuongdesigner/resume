@@ -1,12 +1,19 @@
 import SectionHeader from "../ui/SectionHeader";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { personal, statBadges } from "@/data/resume";
 
-const experienceBadges = [
-  { years: "+6 yrs", label: "Frontend", color: "bg-[#FFF4F4] text-[#FA5252]" },
-  { years: "+4 yrs", label: "Design", color: "bg-[#F2F4FF] text-[#6366F1]" },
-  { years: "+2 yrs", label: "Teaching", color: "bg-[#FCF9F2] text-[#F59E0B]" },
-  { years: "+1 yr", label: "Backend", color: "bg-[#EEF5FA] text-[#0EA5E9]" },
+const badgeColors = [
+  "bg-[#FFF4F4] text-[#FA5252]",
+  "bg-[#F2F4FF] text-[#6366F1]",
+  "bg-[#FCF9F2] text-[#F59E0B]",
+  "bg-[#EEF5FA] text-[#0EA5E9]",
 ];
+
+const experienceBadges = statBadges.map((badge, idx) => ({
+  years: badge.years,
+  label: badge.label.replace(/^Yrs?\s*/i, "").replace(/^Yr\s*/i, ""),
+  color: badgeColors[idx % badgeColors.length],
+}));
 
 export default function AboutSection() {
   return (
@@ -24,11 +31,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-start">
           {/* Introduction */}
           <div className="text-[#44566C] text-xs sm:text-sm leading-6 sm:leading-7">
-            <p>
-              Senior Frontend Developer specializing in React and Next.js, with experience in Vue and TypeScript. 
-              Built and scaled products across e-commerce, restaurant management, and SaaS platforms serving millions of users. 
-              Focused on frontend architecture, performance optimization, and user-centric design.
-            </p>
+            <p>{personal.summary}</p>
           </div>
 
           {/* Experience badges */}
