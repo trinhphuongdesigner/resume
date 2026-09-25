@@ -8,6 +8,9 @@ export const runtime = "nodejs";
 // The resume content changes over time (job titles, projects); never let
 // this route or its result get statically cached.
 export const dynamic = "force-dynamic";
+// Cold-starting @sparticuz/chromium plus a full page load can run past
+// Vercel's default function timeout; raise the ceiling explicitly.
+export const maxDuration = 60;
 
 const isProduction = process.env.NODE_ENV === "production";
 
