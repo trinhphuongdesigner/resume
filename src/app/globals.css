@@ -59,7 +59,11 @@ html[data-theme="dark"] body {
   align-items: center;
   justify-content: center;
   gap: 22px;
-  background: rgba(10, 15, 25, 0.55);
+  /* Dark enough on its own to read against the light theme's photo
+     background (public/img/bg.jpg) — a lighter tint let the blurred photo
+     show through too strongly, washing the near-white page-flip icon into
+     the backdrop instead of standing out against it. */
+  background: rgba(10, 15, 25, 0.86);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   animation: pdf-loader-fade-in 0.25s ease;
