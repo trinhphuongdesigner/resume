@@ -32,15 +32,16 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before hydration to set data-theme on <html> from localStorage or
-// system preference, avoiding a flash of the wrong-theme UI tree on load.
+// Runs before hydration to set data-theme on <html> from localStorage,
+// avoiding a flash of the wrong-theme UI tree on load. Dark is the site's
+// default whenever no explicit choice has been saved yet — deliberately
+// ignoring prefers-color-scheme rather than following the visitor's OS/
+// browser setting.
 const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem('theme');
-    var theme = stored === 'light' || stored === 'dark'
-      ? stored
-      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
     document.documentElement.setAttribute('data-theme', theme);
   } catch (e) {}
 })();
