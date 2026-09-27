@@ -134,21 +134,21 @@ export const workHistory: CompanyGroup[] = [
     projects: [
       {
         id: "bongdatunhi",
-        name: "Bóng Đá Tú Nhi E-commerce",
+        name: "Tu Nhi Football E-commerce",
         time: "08.2026",
         position: "Full-stack Developer",
-        description: "Solo-built e-commerce platform for football gear, including admin dashboard and customer storefront, live in production.",
+        description: "Solo-built e-commerce platform for football gear — admin dashboard and storefront with Firebase authentication (Google/Facebook OAuth, phone OTP), SEO, real-time order notifications, multi-carrier shipping (GHN/GHTK/Viettel Post/J&T with webhook tracking), and Cloudflare R2 image storage; live in production.",
         teamSize: 1,
-        tech: ["Next.js", "NestJS", "PostgreSQL", "Prisma", "TailwindCSS"],
+        tech: ["Next.js", "NestJS", "PostgreSQL", "Prisma", "TailwindCSS", "Firebase", "Socket.io", "Redis", "Cloudflare R2"],
       },
       {
         id: "gutanembroidery",
         name: "Gutan Embroidery E-commerce",
         time: "07.2026",
         position: "Full-stack Developer",
-        description: "Solo-built e-commerce platform for embroidery products with admin dashboard and storefront, including GHN shipping integration.",
+        description: "Solo-built e-commerce platform for embroidery products — admin dashboard and storefront with Firebase authentication (Google/Facebook OAuth, phone OTP), SEO, real-time order notifications, multi-carrier shipping (GHN/GHTK/Viettel Post/J&T), Cloudflare domain config, and R2 image storage.",
         teamSize: 1,
-        tech: ["Next.js", "NestJS", "PostgreSQL", "TypeScript"],
+        tech: ["Next.js", "NestJS", "PostgreSQL", "TypeScript", "Firebase", "Socket.io", "Redis", "Cloudflare R2"],
       },
       {
         id: "slb-games",
@@ -378,22 +378,30 @@ export const knowledge: KnowledgeGroup[] = [
   {
     id: "frontend",
     label: "Frontend",
-    items: ["HTML", "CSS", "JavaScript", "ReactJS", "NextJS"],
+    items: ["HTML", "CSS", "JavaScript", "ReactJS", "NextJS", "SEO"],
   },
   {
     id: "backend",
     label: "Backend",
-    items: ["NodeJS", "Express", "NestJS", "REST API", "MongoDB", "Mongoose", "MySQL", "PostgreSQL"],
+    items: ["NodeJS", "Express", "NestJS", "REST API", "Socket.io", "Redis", "MongoDB", "Mongoose", "MySQL", "PostgreSQL"],
   },
   {
     id: "tools",
     label: "Tools & Deployment",
-    items: ["Git", "Playwright", "Vercel", "Render"],
+    items: ["Git", "Playwright", "Vercel", "Render", "Supabase", "Cloudflare", "Cloudflare R2"],
   },
   {
     id: "integrations",
     label: "Integrations",
-    items: ["GHN API", "Payoo API"],
+    items: [
+      "Multi-carrier Shipping (GHN/GHTK/VTP/J&T)",
+      "Payoo API",
+      "Firebase Auth",
+      "OAuth (Google/Facebook)",
+      "OTP Login",
+      "Email Automation",
+      "Google Analytics 4",
+    ],
   },
   {
     id: "design",
