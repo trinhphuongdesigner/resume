@@ -31,9 +31,9 @@ export interface StatBadge {
 
 export const statBadges: StatBadge[] = [
   { years: "6+", label: "Yrs Frontend" },
+  { years: "2+", label: "Yr Backend" },
   { years: "8+", label: "Yrs Design" },
   { years: "4+", label: "Yrs Teaching" },
-  { years: "2+", label: "Yr Backend" },
 ];
 
 export interface ExperienceEntry {
@@ -96,7 +96,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "freelancer",
     time: "08.2016 — Present",
-    title: "Designer",
+    title: "Full-stack Developer & Designer",
     company: "Freelancer",
     current: true,
     badgeLabel: "Freelance",
@@ -122,12 +122,45 @@ export interface Project {
 export interface CompanyGroup {
   id: string;
   company: string;
-  companyUrl: string;
+  companyUrl?: string;
   projects: Project[];
   visibleCount?: number;
 }
 
 export const workHistory: CompanyGroup[] = [
+  {
+    id: "freelancer",
+    company: "Freelancer",
+    projects: [
+      {
+        id: "bongdatunhi",
+        name: "Bóng Đá Tú Nhi E-commerce",
+        time: "08.2026",
+        position: "Full-stack Developer",
+        description: "Solo-built e-commerce platform for football gear, including admin dashboard and customer storefront, live in production.",
+        teamSize: 1,
+        tech: ["Next.js", "NestJS", "PostgreSQL", "Prisma", "TailwindCSS"],
+      },
+      {
+        id: "gutanembroidery",
+        name: "Gutan Embroidery E-commerce",
+        time: "07.2026",
+        position: "Full-stack Developer",
+        description: "Solo-built e-commerce platform for embroidery products with admin dashboard and storefront, including GHN shipping integration.",
+        teamSize: 1,
+        tech: ["Next.js", "NestJS", "PostgreSQL", "TypeScript"],
+      },
+      {
+        id: "slb-games",
+        name: "SLB Games Platform",
+        time: "02.2026 — 05.2026",
+        position: "Front-end Developer",
+        description: "Built and published the shared UI component library (Storybook) used across the platform's front-end apps.",
+        teamSize: 4,
+        tech: ["Next.js", "TypeScript", "Storybook", "GraphQL"],
+      },
+    ],
+  },
   {
     id: "madison",
     company: "Madison",
@@ -350,7 +383,17 @@ export const knowledge: KnowledgeGroup[] = [
   {
     id: "backend",
     label: "Backend",
-    items: ["NodeJS", "Express", "NestJS", "MongoDB", "Mongoose", "MySQL", "PostgreSQL"],
+    items: ["NodeJS", "Express", "NestJS", "REST API", "MongoDB", "Mongoose", "MySQL", "PostgreSQL"],
+  },
+  {
+    id: "tools",
+    label: "Tools & Deployment",
+    items: ["Git", "Playwright", "Vercel", "Render"],
+  },
+  {
+    id: "integrations",
+    label: "Integrations",
+    items: ["GHN API", "Payoo API"],
   },
   {
     id: "design",
