@@ -2,6 +2,24 @@
 
 import { personal, contact } from "@/data/resume";
 
+// Drawn as SVG rather than the "→" character: JetBrains Mono's latin
+// subset has no U+2192 glyph, so the PDF fell back to a system font that
+// iOS Quick Look rendered blank.
+function ArrowLabel() {
+  return (
+    <svg className="label" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+      <path
+        d="M1 6h9M6.5 2.5 10 6l-3.5 3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 interface DarkSidebarProps {
   onDownloadPDF: () => void;
   isGeneratingPDF: boolean;
@@ -14,10 +32,11 @@ export default function DarkSidebar({ onDownloadPDF, isGeneratingPDF }: DarkSide
         <div className="identity">
           <div className="identity-photo">
             <div className="avatar-wrap">
-              <div
-                className="avatar"
-                style={{ backgroundImage: `url(${personal.avatarSrc})` }}
-              />
+              {/* A real <img>, not a CSS background-image: Chromium writes
+                  backgrounds into the PDF as tiling patterns, which iOS
+                  Quick Look/PDFKit scales wrongly (shows a zoomed-in crop). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="avatar" src={personal.avatarSrc} alt={personal.name} />
             </div>
             {/* display:contents on identity-photo/identity-info flattens this
                 into plain document flow on screen, where it's hidden and the
@@ -28,16 +47,16 @@ export default function DarkSidebar({ onDownloadPDF, isGeneratingPDF }: DarkSide
                 this copy next to the photo and hides the .sidebar-cta one. */}
             <div className="contact-block contact-block-print">
               <div className="row">
-                <span className="label">→</span> <span className="value">{contact.phone}</span>
+                <ArrowLabel /> <span className="value">{contact.phone}</span>
               </div>
               <div className="row">
-                <span className="label">→</span> <span className="value">{contact.email}</span>
+                <ArrowLabel /> <span className="value">{contact.email}</span>
               </div>
               <div className="row">
-                <span className="label">→</span> <span className="value">{contact.location}</span>
+                <ArrowLabel /> <span className="value">{contact.location}</span>
               </div>
               <div className="row">
-                <span className="label">→</span> <span className="value">{contact.birthday}</span>
+                <ArrowLabel /> <span className="value">{contact.birthday}</span>
               </div>
             </div>
           </div>
@@ -50,16 +69,16 @@ export default function DarkSidebar({ onDownloadPDF, isGeneratingPDF }: DarkSide
         <div className="sidebar-cta">
           <div className="contact-block">
             <div className="row">
-              <span className="label">→</span> {contact.phone}
+              <ArrowLabel /> {contact.phone}
             </div>
             <div className="row">
-              <span className="label">→</span> {contact.email}
+              <ArrowLabel /> {contact.email}
             </div>
             <div className="row">
-              <span className="label">→</span> {contact.location}
+              <ArrowLabel /> {contact.location}
             </div>
             <div className="row">
-              <span className="label">→</span> {contact.birthday}
+              <ArrowLabel /> {contact.birthday}
             </div>
           </div>
           <button className="btn-download" onClick={onDownloadPDF} disabled={isGeneratingPDF}>

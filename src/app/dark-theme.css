@@ -232,9 +232,10 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
   background-color: #0e2240;
-  background-size: cover;
-  background-position: center;
   border: 2px solid rgba(230, 241, 255, 0.15);
 }
 
@@ -412,6 +413,7 @@
   align-items: center;
 }
 .dark-root .contact-block .label {
+  flex-shrink: 0;
   color: var(--accent);
 }
 
@@ -1155,10 +1157,53 @@
     background-color: #eef2f6;
   }
 
+  /* iOS Quick Look/PDFKit mis-renders two things Chromium's PDF backend
+     emits, even though desktop viewers show them fine:
+     - background-clip:text gradients (written as a pattern clipped to the
+       glyphs): iOS drops the clip and paints a solid gradient rectangle
+       over/next to the text.
+     - filter:blur() glows (written as images with a soft mask): iOS
+       ignores the mask and paints a hard-edged colored square.
+     Print swaps the gradient text for a solid accent color and drops the
+     decorative blurred glows / hover spotlights entirely. */
+  .dark-root .title,
+  .dark-root .hero h1 .grad,
+  .dark-root .stat .num {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+  }
+  .dark-root .title {
+    color: var(--accent);
+  }
+  .dark-root .hero h1 .grad {
+    color: var(--accent-2);
+  }
+  .dark-root .stat .num {
+    color: var(--stat-a);
+  }
+  /* The 4th tile's hardcoded on-screen orange is too light to read as
+     solid text on white. */
+  .dark-root .stat:nth-child(4) {
+    --stat-a: #b45309;
+  }
+  .dark-root .stat::after,
+  .dark-root .glow-card::before {
+    display: none;
+  }
+  /* Gradients that fade to `transparent` are also written with a soft
+     mask (over a page-sized pattern); keep their stops fully opaque. */
+  .dark-root .section-title::after {
+    background: var(--border);
+  }
+  .dark-root .timeline::before {
+    background: linear-gradient(180deg, var(--accent), var(--accent-2) 30%, var(--accent-3) 60%, var(--accent-2));
+  }
+
   .dark-root .company-cluster::before {
-    box-shadow:
-      0 0 0 4px #ffffff,
-      0 0 10px rgba(10, 25, 47, 0.2);
+    /* No blurred shadow: like filter:blur(), it's rasterized with a soft
+       mask that iOS Quick Look paints as an opaque block. */
+    box-shadow: 0 0 0 4px #ffffff;
   }
 
   .dark-root .edu-card {

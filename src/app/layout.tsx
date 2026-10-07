@@ -24,9 +24,34 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
+// Absolute base for og:image / twitter:image URLs. Social crawlers ignore
+// relative URLs, so set NEXT_PUBLIC_SITE_URL to the custom domain if there is
+// one; otherwise fall back to Vercel's production domain.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+const siteTitle = "Mr. Trinh Phuong - Mid-level Full-stack Developer";
+const siteDescription = "Personal Resume Website";
+
 export const metadata: Metadata = {
-  title: "Mr. Trinh Phuong - Mid-level Full-stack Developer",
-  description: "Personal Resume Website",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  openGraph: {
+    type: "profile",
+    url: "/",
+    title: siteTitle,
+    description: siteDescription,
+    siteName: "Trinh Phuong",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
   icons: {
     icon: "/img/brand/favicon_io/favicon.ico",
   },
