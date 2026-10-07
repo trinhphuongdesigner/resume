@@ -3,7 +3,7 @@ export const personal = {
   fullName: "Trinh Dinh Phuong",
   title: "Mid-level Full-stack Developer",
   summary:
-    "Mid-level Full-stack Developer specializing in React, Next.js, and TypeScript, with additional experience in Vue. Built and scaled products across e-commerce, restaurant management, hotel, residential management, and SaaS platforms serving millions of users. Focused on frontend architecture, performance optimization, and user-centric design.",
+    "Mid-level Full-stack Developer specializing in React, Next.js, and TypeScript, with additional experience in Vue. Built and scaled products across e-commerce, restaurant management, hotel, residential management, and SaaS platforms serving millions of users. Focused on frontend architecture and performance optimization.",
   avatarSrc: "/img/brand/ava-min.jpg",
 };
 
@@ -32,7 +32,6 @@ export interface StatBadge {
 export const statBadges: StatBadge[] = [
   { years: "6+", label: "Yrs Frontend" },
   { years: "2+", label: "Yr Backend" },
-  { years: "8+", label: "Yrs Design" },
   { years: "4+", label: "Yrs Teaching" },
 ];
 
@@ -96,7 +95,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "freelancer",
     time: "08.2016 — Present",
-    title: "Full-stack Developer & Designer",
+    title: "Full-stack Developer",
     company: "Freelancer",
     current: true,
     badgeLabel: "Freelance",

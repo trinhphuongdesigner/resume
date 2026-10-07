@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Poppins, Roboto_Slab, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeToggle from "@/components/ThemeToggle";
-import "./globals.css";
-import "./dark-theme.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,7 +31,7 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
-const siteTitle = "Mr. Trinh Phuong - Mid-level Full-stack Developer";
+const siteTitle = "Trinh Dinh Phuong - Mid-level Full-stack Developer";
 const siteDescription = "Personal Resume Website";
 
 export const metadata: Metadata = {
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
     url: "/",
     title: siteTitle,
     description: siteDescription,
-    siteName: "Trinh Phuong",
+    siteName: "Trinh Dinh Phuong",
   },
   twitter: {
     card: "summary_large_image",
