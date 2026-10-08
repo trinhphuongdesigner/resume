@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins, Roboto_Slab, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeToggle from "@/components/ThemeToggle";
+import "./globals.css";
+import "./dark-theme.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
