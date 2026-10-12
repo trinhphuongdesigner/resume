@@ -33,7 +33,7 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
-const siteTitle = "Trinh Dinh Phuong - Mid-level Full-stack Developer";
+const siteTitle = "Trinh Dinh Phuong - Full-stack Developer";
 const siteDescription = "Personal Resume Website";
 
 export const metadata: Metadata = {

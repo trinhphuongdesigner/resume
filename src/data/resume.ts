@@ -1,9 +1,9 @@
 export const personal = {
   name: "Trinh Dinh Phuong",
   fullName: "Trinh Dinh Phuong",
-  title: "Mid-level Full-stack Developer",
+  title: "Full-stack Developer",
   summary:
-    "Mid-level Full-stack Developer specializing in React, Next.js, and TypeScript, with additional experience in Vue. Built and scaled products across e-commerce, restaurant management, hotel, residential management, and SaaS platforms serving millions of users. Focused on frontend architecture and performance optimization.",
+    "Full-stack Developer specializing in React, Next.js, and TypeScript, with additional experience in Vue. Built and scaled products across e-commerce, restaurant management, hotel, residential management, and SaaS platforms serving millions of users. Focused on frontend architecture and performance optimization.",
   avatarSrc: "/img/brand/ava-min.jpg",
 };
 
